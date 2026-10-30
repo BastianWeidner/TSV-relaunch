@@ -1,0 +1,96 @@
+<!-- {"title": "Wassergymnastik & Erwachsenenschwimmen", "description": "Wassergymnastik und Erwachsenenschwimmen beim TSV Fischach: dienstags und donnerstags, mit Zehnerkarte, auch ohne Mitgliedschaft.", "nav": "erwachsene"} -->
+<section class="hero hero-small">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="color: var(--sun)">Für Erwachsene · auch ohne Mitgliedschaft</p>
+      <h1>Fit im Wasser</h1>
+      <p class="lead">Zwei Angebote am späten Nachmittag: Wassergymnastik für Beweglichkeit und Kraft am Dienstag und Donnerstag, Erwachsenenschwimmen für Technik und Ausdauer am Donnerstag direkt im Anschluss.</p>
+    </div>
+    <img class="hero-logo" src="assets/img/logo-320.webp" width="320" height="248" alt="">
+  </div>
+  {{> wave}}
+</section>
+
+<section class="section" id="wassergymnastik" aria-labelledby="wg-titel">
+  <div class="wrap grid-2">
+    <div class="stack">
+      <p class="eyebrow">Dienstag und Donnerstag · 16:30–17:00</p>
+      <h2 id="wg-titel">Wasser&shy;gymnastik</h2>
+      <p class="lead">Mit Musik und Hilfsmitteln. Das Wasser trägt, schont die Gelenke und gibt gleichzeitig Widerstand.</p>
+      <dl class="spec">
+        <div><dt>Dauer</dt><dd>30 Min.</dd></div>
+        <div><dt>Karte</dt><dd>10 × für 40 €</dd></div>
+        <div><dt>Niveau</dt><dd>alle</dd></div>
+      </dl>
+      <ul class="feature-list">
+        <li><span><b>Beweglichkeit:</b> Übungen für Schultern, Rücken und Hüfte.</span></li>
+        <li><span><b>Kraft und Kreislauf:</b> Mit Geräten und im Takt der Musik.</span></li>
+        <li><span><b>Gemeinsam:</b> Eine feste Gruppe, die sich jede Woche trifft.</span></li>
+      </ul>
+      <div class="times">{{zeiten:wassergymnastik}}</div>
+    </div>
+    <figure class="photo tall" style="margin: 0"><img src="assets/img/freibad-abend-800.webp" srcset="assets/img/freibad-abend-800.webp 800w, assets/img/freibad-abend-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 50vw" width="800" height="600" alt="Ruhiges Becken in der Abendsonne" loading="lazy"></figure>
+  </div>
+</section>
+
+<section class="section band" id="erwachsenenschwimmen" aria-labelledby="es-titel">
+  <div class="wrap grid-2">
+    <figure class="photo" style="margin: 0"><img src="assets/img/sprung-800.webp" srcset="assets/img/sprung-800.webp 800w, assets/img/sprung-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 50vw" width="800" height="450" alt="Ein Schwimmer springt kopfüber ins Becken des Hallenbads" loading="lazy"></figure>
+    <div class="stack">
+      <p class="eyebrow">Donnerstag · 17:15–17:45</p>
+      <h2 id="es-titel">Erwachsenen&shy;schwimmen</h2>
+      <p class="lead">Stiloptimierung für alle, die schon schwimmen können und besser werden wollen: sauberer Kraul, ruhiger Atem, längere Strecken.</p>
+      <dl class="spec">
+        <div><dt>Dauer</dt><dd>30 Min.</dd></div>
+        <div><dt>Karte</dt><dd>10 × für 40 €</dd></div>
+        <div><dt>Für</dt><dd>Schwimmer</dd></div>
+      </dl>
+      <ul class="feature-list">
+        <li><span><b>Technik:</b> Brust, Rücken und Kraul mit Tipps vom Beckenrand.</span></li>
+        <li><span><b>Ausdauer:</b> Strecken langsam steigern, mit Plan.</span></li>
+        <li><span><b>Ohne Wettkampf:</b> Jeder schwimmt in seinem Tempo.</span></li>
+      </ul>
+      <div class="times">{{zeiten:erwachsenenschwimmen}}</div>
+    </div>
+  </div>
+</section>
+
+<section class="section band-tile" id="anmelden" aria-labelledby="anm-titel">
+  <div class="wrap grid-2">
+    <div class="stack">
+      <p class="eyebrow">Platz anfragen</p>
+      <h2 id="anm-titel">Anmelden</h2>
+      <p class="lead">Die Gruppen sind klein. Melde dich bitte vorher an, wir sagen dir dann, ab wann du kommen kannst.</p>
+      <div class="callout"><b>Lieber per Mail?</b><span>Schreib an <a href="mailto:bleib.fit@tsv-fischach-schwimmen.de">bleib.fit@tsv-fischach-schwimmen.de</a>.</span></div>
+      <div class="callout"><b>Bezahlen</b><span>Mit der Zehnerkarte vor Ort: 10 Einheiten à 30 Minuten für 40 €. Die Karte wird bei jedem Besuch gestempelt.</span></div>
+    </div>
+    <form class="form js-form" action="api/formular.php" method="post" novalidate>
+      <input type="hidden" name="formular" value="erwachsene">
+      <fieldset>
+        <legend>Angebot <span class="req">*</span></legend>
+        <label class="check"><input type="radio" name="angebot" value="Wassergymnastik" required checked> <span>Wassergymnastik, Di oder Do 16:30</span></label>
+        <label class="check"><input type="radio" name="angebot" value="Erwachsenenschwimmen"> <span>Erwachsenenschwimmen, Do 17:15</span></label>
+      </fieldset>
+      <div class="row">
+        <div class="field"><label for="ew-name">Name <span class="req">*</span></label><input id="ew-name" name="name" required maxlength="80" autocomplete="name"></div>
+        <div class="field"><label for="ew-mail">E-Mail <span class="req">*</span></label><input id="ew-mail" name="email" type="email" required maxlength="120" autocomplete="email"></div>
+      </div>
+      <div class="field"><label for="ew-tel">Telefon <span class="muted">(freiwillig)</span></label><input id="ew-tel" name="telefon" type="tel" maxlength="40" autocomplete="tel"></div>
+      <div class="field">
+        <label for="ew-level">Wie gut schwimmst du?</label>
+        <select id="ew-level" name="niveau">
+          <option>Ich schwimme gelegentlich</option>
+          <option>Ich schwimme regelmäßig</option>
+          <option>Ich möchte Kraul lernen</option>
+          <option>Für Wassergymnastik nicht wichtig</option>
+        </select>
+      </div>
+      <div class="field"><label for="ew-msg">Nachricht <span class="muted">(freiwillig)</span></label><textarea id="ew-msg" name="nachricht" maxlength="800"></textarea></div>
+      <label class="check"><input type="checkbox" name="infomail" value="ja"> <span>Ich möchte zusätzlich die Infomail zu Erwachsenenangeboten (mit Bestätigungslink).</span></label>
+      <label class="check"><input type="checkbox" name="einwilligung" value="ja" required> <span>Meine Angaben werden zur Bearbeitung der Anmeldung gespeichert und danach gelöscht. Mehr in der <a href="datenschutz.html#anmeldung">Datenschutzerklärung</a>. <span class="req">*</span></span></label>
+      <div class="hp" aria-hidden="true"><label for="ew-web">Bitte leer lassen</label><input id="ew-web" name="website" tabindex="-1" autocomplete="off"></div>
+      <button class="btn btn-sun" type="submit">Anmeldung senden</button>
+      <p class="form-status" role="status" hidden></p>
+    </form>
+  </div>
+</section>

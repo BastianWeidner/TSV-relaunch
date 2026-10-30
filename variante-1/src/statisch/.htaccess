@@ -1,0 +1,31 @@
+# Strato / Apache: Einstellungen für die statische Seite
+Options -Indexes
+DirectoryIndex index.html
+AddDefaultCharset utf-8
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # immer HTTPS und ohne www
+  RewriteCond %{HTTPS} off [OR]
+  RewriteCond %{HTTP_HOST} ^www\. [NC]
+  RewriteRule ^ https://tsv-fischach-schwimmen.de%{REQUEST_URI} [L,R=301]
+
+  # alte Joomla-Adressen auf die neuen Seiten weiterleiten
+  RewriteRule ^index\.php/impressum/?$ /impressum/ [L,R=301]
+  RewriteRule ^index\.php/datenschutz/?$ /datenschutz/ [L,R=301]
+  RewriteRule ^index\.php/haftungsausschluss/?$ /impressum/ [L,R=301]
+  RewriteRule ^index\.php/?$ / [L,R=301]
+  RewriteRule ^(index\.php/)?blog(/.*)?$ / [L,R=301]
+  RewriteRule ^index\.php/kontakt/?$ /kontakt/ [L,R=301]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+  <FilesMatch "\.(css|woff2|png|jpg|svg)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>

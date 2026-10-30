@@ -1,0 +1,14 @@
+# Erzeugte Dateien: werden mit build.py jederzeit neu gebaut
+dist/
+variante-1/vorschau/
+__pycache__/
+*.pyc
+
+# Geheimnisse und Zugangsdaten nie einchecken
+variante-2/api/config.php
+.env
+*.key
+
+# System
+.DS_Store
+Thumbs.db

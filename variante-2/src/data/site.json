@@ -1,0 +1,18 @@
+{
+  "_hinweis": "Grundeinstellungen. kurse_csv_url: CSV-Export des Google Sheets 'Website' (Freigabe: Jeder mit dem Link, Betrachter; gid=0 ist das erste Blatt). Leer = Beispieldaten aus kurse-beispiel.csv. Ohne Internet: python3 build.py --beispiel",
+  "kurse_csv_url": "https://docs.google.com/spreadsheets/d/1asln2qrI9GH1atwurdv8Y-tZDiAbk9mWpX-fXk2XK1Y/export?format=csv&gid=0",
+  "domain": "https://tsv-fischach-schwimmen.de",
+  "downloads": [
+    {
+      "titel": "Beitrittserklärung",
+      "beschreibung": "Mitgliedschaft im TSV Fischach und in der Abteilung Schwimmen",
+      "datei": "downloads/beitrittserklaerung.pdf"
+    },
+    {
+      "titel": "Datenschutz-Einwilligung",
+      "beschreibung": "Einwilligung nach DSGVO, auch für Fotos",
+      "datei": "downloads/dsgvo-einwilligung.pdf"
+    }
+  ],
+  "_downloads": "PDF in src/static/downloads/ legen (Name wie bei 'datei'), dann bauen. Statt eines Dateinamens geht auch ein vollständiger Link (https://…), z. B. Google Drive. Fehlt die Datei, zeigt die Seite 'folgt in Kürze'."
+}

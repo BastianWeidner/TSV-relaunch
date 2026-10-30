@@ -1,0 +1,15 @@
+[
+  {"tag": "Dienstag", "von": "16:30", "bis": "17:00", "angebot": "Wassergymnastik", "schluessel": "wassergymnastik", "seite": "wassergymnastik/", "hinweis": "Bitte um Anmeldung"},
+  {"tag": "Dienstag", "von": "17:15", "bis": "18:00", "angebot": "Gruppe II", "schluessel": "gruppe-ii", "seite": "gruppen/gruppe-ii/"},
+  {"tag": "Dienstag", "von": "18:15", "bis": "19:30", "angebot": "Kader", "schluessel": "kader", "seite": "gruppen/a-b-kader/"},
+  {"tag": "Mittwoch", "von": "16:00", "bis": "17:00", "angebot": "Gruppe I", "schluessel": "gruppe-i", "seite": "gruppen/gruppe-i/"},
+  {"tag": "Mittwoch", "von": "17:00", "bis": "18:00", "angebot": "Gruppe II", "schluessel": "gruppe-ii", "seite": "gruppen/gruppe-ii/"},
+  {"tag": "Donnerstag", "von": "16:30", "bis": "17:00", "angebot": "Wassergymnastik", "schluessel": "wassergymnastik", "seite": "wassergymnastik/", "hinweis": "Bitte um Anmeldung"},
+  {"tag": "Donnerstag", "von": "17:15", "bis": "17:45", "angebot": "Erwachsenenschwimmen / Stiloptimierung", "schluessel": "erwachsenenschwimmen", "seite": "wassergymnastik/erwachsenenschwimmen/", "hinweis": "Bitte um Anmeldung"},
+  {"tag": "Freitag", "von": "16:00", "bis": "17:00", "angebot": "Gruppe III", "schluessel": "gruppe-iii", "seite": "gruppen/gruppe-iii/"},
+  {"tag": "Freitag", "von": "17:00", "bis": "18:30", "angebot": "Gruppe IV", "schluessel": "gruppe-iv", "seite": "gruppen/gruppe-iv/"},
+  {"tag": "Samstag", "von": "09:00", "bis": "12:00", "angebot": "Schwimmkurse", "schluessel": "schwimmkurse", "seite": "schwimmkurse/", "hinweis": "nur mit Anmeldung"},
+  {"tag": "Samstag", "von": "12:00", "bis": "13:00", "angebot": "Gruppe I", "schluessel": "gruppe-i", "seite": "gruppen/gruppe-i/"},
+  {"tag": "Samstag", "von": "13:00", "bis": "14:00", "angebot": "Gruppe II", "schluessel": "gruppe-ii", "seite": "gruppen/gruppe-ii/"},
+  {"tag": "Samstag", "von": "18:00", "bis": "19:30", "angebot": "Kader", "schluessel": "kader", "seite": "gruppen/a-b-kader/"}
+]

@@ -1,0 +1,17 @@
+<form class="form js-form" action="api/formular.php" method="post" novalidate>
+  <input type="hidden" name="formular" value="infomail">
+  <div class="field">
+    <label for="im-email-{{uid}}">E-Mail-Adresse <span class="req">*</span></label>
+    <input id="im-email-{{uid}}" name="email" type="email" autocomplete="email" required maxlength="120" placeholder="name@beispiel.de">
+  </div>
+  <fieldset>
+    <legend>Worüber möchtest du informiert werden?</legend>
+    <label class="check"><input type="checkbox" name="themen[]" value="schwimmkurse" checked> <span>Neue Schwimmkurse für Kinder</span></label>
+    <label class="check"><input type="checkbox" name="themen[]" value="erwachsene"> <span>Wassergymnastik und Erwachsenenschwimmen</span></label>
+    <label class="check"><input type="checkbox" name="themen[]" value="verein"> <span>Neuigkeiten aus der Abteilung</span></label>
+  </fieldset>
+  <label class="check"><input type="checkbox" name="einwilligung" value="ja" required> <span>Ich möchte die Infomail erhalten. Ich bekomme zuerst eine Mail mit einem Bestätigungslink. Abmelden kann ich mich jederzeit. Details in der <a href="datenschutz.html#infomail">Datenschutzerklärung</a>. <span class="req">*</span></span></label>
+  <div class="hp" aria-hidden="true"><label for="im-web-{{uid}}">Bitte leer lassen</label><input id="im-web-{{uid}}" name="website" tabindex="-1" autocomplete="off"></div>
+  <button class="btn btn-sun" type="submit">Infomail bestellen</button>
+  <p class="form-status" role="status" hidden></p>
+</form>

@@ -1,0 +1,116 @@
+<!-- {"title": "", "description": "Schwimmabteilung des TSV Fischach: Seepferdchenkurse, Wassergymnastik, Erwachsenenschwimmen und Training von Gruppe I bis zum Kader."} -->
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="color: var(--sun)">TSV Fischach · Schwimmabteilung</p>
+      <h1>Rein ins Wasser, <em>Fischach!</em></h1>
+      <p class="lead">Wir bringen Kindern das Schwimmen bei, trainieren vom ersten Abzeichen bis zum Wettkampf und bieten Erwachsenen Wassergymnastik und Techniktraining. Teamgeist und Spaß stehen dabei immer vorne.</p>
+      <div class="actions">
+        <a class="btn btn-sun" href="schwimmkurse.html">Schwimmkurs finden</a>
+        <a class="btn btn-ghost" href="#zeiten">Trainingszeiten</a>
+      </div>
+    </div>
+    <img class="hero-logo" src="assets/img/logo-640.webp" width="640" height="495" alt="Unser Maskottchen: ein lachender Tintenfisch, der das rot-weiße Fischacher Wappen mit den drei Fischen umarmt">
+  </div>
+  {{> wave}}
+</section>
+
+<div class="wrap" style="margin-top: -.5rem">
+  {{hinweis}}
+</div>
+
+<section class="section" aria-labelledby="angebote">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Für alle, auch ohne Mitgliedschaft</p>
+      <h2 id="angebote">Unsere Angebote</h2>
+      <p class="lead">Kurse für Kinder und Erwachsene. Einfach anmelden, bezahlt wird pro Kurs oder mit der Zehnerkarte.</p>
+    </div>
+    <div class="grid-4">
+      <a class="product c-pool" href="schwimmkurse.html#seepferdchen">
+        <div class="product-top"><p class="eyebrow">Für Schulkinder</p><h3>Seepferdchen&shy;kurs</h3></div>
+        <div class="product-body">
+          {{kurs-status:Seepferdchenkurs}}
+          <p>In 6 bis 11 Terminen zum ersten Abzeichen: 25 Meter schwimmen, springen, tauchen.</p>
+          <p class="price"><b>12,50 €</b><span>pro Termin à 45 Min.</span></p>
+          <span class="more">Zum Kurs →</span>
+        </div>
+      </a>
+      <a class="product c-aqua" href="schwimmkurse.html#aufbaukurs">
+        <div class="product-top"><p class="eyebrow">Fast geschafft</p><h3>Aufbaukurs</h3></div>
+        <div class="product-body">
+          {{kurs-status:Aufbaukurs}}
+          <p>Ein paar Termine extra für Kinder, denen nach dem Kurs nur noch ein Stück zum Seepferdchen fehlt.</p>
+          <p class="price"><b>12,50 €</b><span>pro Termin, unter 6 Termine</span></p>
+          <span class="more">Zum Kurs →</span>
+        </div>
+      </a>
+      <a class="product c-red" href="erwachsene.html#wassergymnastik">
+        <div class="product-top"><p class="eyebrow">Für Erwachsene</p><h3>Wasser&shy;gymnastik</h3></div>
+        <div class="product-body">
+          <span class="chip chip-extern">Di &amp; Do 16:30</span>
+          <p>Bewegung mit Musik und Geräten, gelenkschonend und gesellig.</p>
+          <p class="price"><b>40 €</b><span>Zehnerkarte à 30 Min.</span></p>
+          <span class="more">Mehr erfahren →</span>
+        </div>
+      </a>
+      <a class="product c-sun" href="erwachsene.html#erwachsenenschwimmen">
+        <div class="product-top"><p class="eyebrow">Für Erwachsene</p><h3>Erwachsenen&shy;schwimmen</h3></div>
+        <div class="product-body">
+          <span class="chip chip-extern">Donnerstag 17:15</span>
+          <p>Technik verbessern, Kraul lernen, Ausdauer aufbauen. Mit Trainer am Beckenrand.</p>
+          <p class="price"><b>40 €</b><span>Zehnerkarte à 30 Min.</span></p>
+          <span class="more">Mehr erfahren →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section band" aria-labelledby="training-titel">
+  <div class="wrap grid-2">
+    <figure class="photo" style="margin: 0">
+      <img src="assets/img/hallenbad-800.webp" srcset="assets/img/hallenbad-800.webp 800w, assets/img/hallenbad-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 50vw" width="800" height="600" alt="Leeres Hallenbad mit Bahnleine und großen Fenstern" loading="lazy">
+    </figure>
+    <div class="stack">
+      <p class="eyebrow">Für Mitglieder</p>
+      <h2 id="training-titel">Vom Seepferdchen bis zum Kader</h2>
+      <p class="lead">Nach dem Seepferdchen geht es in unseren Trainingsgruppen weiter. Jede Gruppe hat ein Ziel und ein Abzeichen, im Kader schwimmen wir Wettkämpfe bis auf bayerischer Ebene.</p>
+      <div class="leine" role="presentation"></div>
+      <ul class="feature-list">
+        <li><span><b>Gruppe I bis IV:</b> Seeräuber, Bronze, Silber, Gold. Technik, Ausdauer, Start und Wende.</span></li>
+        <li><span><b>Kader:</b> Leistungstraining zweimal pro Woche und Wettkämpfe.</span></li>
+        <li><span><b>Schnuppern:</b> Vorher per Mail anfragen, Training mit Mitgliedschaft im TSV Fischach.</span></li>
+      </ul>
+      <div class="actions"><a class="btn btn-deep" href="training.html">Alle Gruppen ansehen</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="zeiten" aria-labelledby="zeiten-titel">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Wochenplan</p>
+      <h2 id="zeiten-titel">Unsere Trainingszeiten</h2>
+      <p class="muted">Gruppe I und Gruppe II gibt es mehrfach. Welche Termine für dein Kind gelten, sagt dir das Trainerteam. Der Kader trainiert zweimal pro Woche.</p>
+    </div>
+    {{woche}}
+  </div>
+</section>
+
+<section class="section band-tile" aria-labelledby="bad-titel">
+  <div class="wrap grid-2">
+    <div class="stack">
+      <p class="eyebrow">Wo wir schwimmen</p>
+      <h2 id="bad-titel">Unser Bad</h2>
+      <p class="lead">Training und Kurse finden im Schulschwimmbad Fischach statt, dem Hallenbad in der Grund- und Mittelschule.</p>
+      <div class="actions"><a class="btn btn-deep" href="kontakt.html#anfahrt">Anfahrt</a><a class="btn btn-ghost" href="verein.html">Über den Verein</a></div>
+    </div>
+    <div class="grid-2" style="gap: 1rem">
+      <figure class="photo tall" style="margin: 0"><img src="assets/img/hallenbad-800.webp" width="800" height="600" alt="Hallenbad mit Bahnleine und großen Fenstern" loading="lazy"></figure>
+      <figure class="photo tall" style="margin: 0"><img src="assets/img/hallenbad-winter-800.webp" width="800" height="450" alt="Hallenbad im Winter, draußen liegt Schnee" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+{{> infomail-band}}

@@ -1,0 +1,129 @@
+{
+  "_hinweis": "Einzige Quelle für alle Trainingszeiten. Startseite, Trainingsseite und Erwachsenenseite werden daraus erzeugt. Grundlage: Screenshot der alten Startseite vor der Abschaltung (von Bastian, 29.10.2026).",
+  "gruppen": {
+    "gruppe-1": {
+      "name": "Gruppe I",
+      "seite": "training.html#gruppe-1",
+      "fuer": "mitglieder"
+    },
+    "gruppe-2": {
+      "name": "Gruppe II",
+      "seite": "training.html#gruppe-2",
+      "fuer": "mitglieder"
+    },
+    "gruppe-3": {
+      "name": "Gruppe III",
+      "seite": "training.html#gruppe-3",
+      "fuer": "mitglieder"
+    },
+    "gruppe-4": {
+      "name": "Gruppe IV",
+      "seite": "training.html#gruppe-4",
+      "fuer": "mitglieder"
+    },
+    "kader": {
+      "name": "Kader",
+      "seite": "training.html#kader",
+      "fuer": "mitglieder"
+    },
+    "wassergymnastik": {
+      "name": "Wassergymnastik",
+      "seite": "erwachsene.html#wassergymnastik",
+      "fuer": "extern"
+    },
+    "erwachsenenschwimmen": {
+      "name": "Erwachsenenschwimmen",
+      "seite": "erwachsene.html#erwachsenenschwimmen",
+      "fuer": "extern"
+    },
+    "schwimmkurse": {
+      "name": "Schwimmkurse",
+      "seite": "schwimmkurse.html",
+      "fuer": "extern"
+    }
+  },
+  "termine": [
+    {
+      "tag": "Dienstag",
+      "gruppe": "wassergymnastik",
+      "von": "16:30",
+      "bis": "17:00",
+      "zusatz": "mit Anmeldung"
+    },
+    {
+      "tag": "Dienstag",
+      "gruppe": "gruppe-2",
+      "von": "17:15",
+      "bis": "18:00"
+    },
+    {
+      "tag": "Dienstag",
+      "gruppe": "kader",
+      "von": "18:15",
+      "bis": "19:30"
+    },
+    {
+      "tag": "Mittwoch",
+      "gruppe": "gruppe-1",
+      "von": "16:00",
+      "bis": "17:00"
+    },
+    {
+      "tag": "Mittwoch",
+      "gruppe": "gruppe-2",
+      "von": "17:00",
+      "bis": "18:00"
+    },
+    {
+      "tag": "Donnerstag",
+      "gruppe": "wassergymnastik",
+      "von": "16:30",
+      "bis": "17:00",
+      "zusatz": "mit Anmeldung"
+    },
+    {
+      "tag": "Donnerstag",
+      "gruppe": "erwachsenenschwimmen",
+      "von": "17:15",
+      "bis": "17:45",
+      "zusatz": "Stiloptimierung, mit Anmeldung"
+    },
+    {
+      "tag": "Freitag",
+      "gruppe": "gruppe-3",
+      "von": "16:00",
+      "bis": "17:00"
+    },
+    {
+      "tag": "Freitag",
+      "gruppe": "gruppe-4",
+      "von": "17:00",
+      "bis": "18:30"
+    },
+    {
+      "tag": "Samstag",
+      "gruppe": "schwimmkurse",
+      "von": "09:00",
+      "bis": "12:00",
+      "zusatz": "nur mit Anmeldung"
+    },
+    {
+      "tag": "Samstag",
+      "gruppe": "gruppe-1",
+      "von": "12:00",
+      "bis": "13:00"
+    },
+    {
+      "tag": "Samstag",
+      "gruppe": "gruppe-2",
+      "von": "13:00",
+      "bis": "14:00"
+    },
+    {
+      "tag": "Samstag",
+      "gruppe": "kader",
+      "von": "18:00",
+      "bis": "19:30"
+    }
+  ]
+}

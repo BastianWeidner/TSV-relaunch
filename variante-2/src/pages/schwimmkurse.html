@@ -1,0 +1,96 @@
+<!-- {"title": "Schwimmkurse", "description": "Seepferdchenkurs, Aufbaukurs und Robby-Kurs beim TSV Fischach: Ablauf, Termine, Preise und Warteliste.", "nav": "kurse"} -->
+<section class="hero hero-small">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="color: var(--sun)">Für Kinder · auch ohne Mitgliedschaft</p>
+      <h1>Schwimmkurse</h1>
+      <p class="lead">Sicher schwimmen ist das Wichtigste, was ein Kind im Wasser lernen kann. In kleinen Gruppen und mit erfahrenen Kursleitungen geht es Schritt für Schritt zum Seepferdchen.</p>
+    </div>
+    <img class="hero-logo" src="assets/img/logo-320.webp" width="320" height="248" alt="">
+  </div>
+  {{> wave}}
+</section>
+
+<section class="section" aria-labelledby="stand-titel">
+  <div class="wrap stack-lg">
+    <div class="section-head" style="margin: 0">
+      <p class="eyebrow">Live aus der Kursplanung</p>
+      <h2 id="stand-titel">Aktueller Stand der Kurse</h2>
+      <p class="muted">Diese Liste pflegt die Kursleitung in einer Tabelle. Freie Plätze vergeben wir an die Warteliste, nach Anmeldung und mit Vorrang für Kinder aus Fischach und dem direkten Einzugsgebiet.</p>
+    </div>
+    {{kurse}}
+    <div class="actions"><a class="btn btn-sun" href="warteliste.html">Auf die Warteliste</a></div>
+  </div>
+</section>
+
+<section class="section band" id="seepferdchen" aria-labelledby="see-titel">
+  <div class="wrap grid-2">
+    <div class="stack">
+      <p class="eyebrow">Unser Klassiker</p>
+      <h2 id="see-titel">Seepferdchen&shy;kurs</h2>
+      <p class="lead">Für Schulkinder, die noch nicht schwimmen können. Am Ende stehen 25 Meter am Stück und das erste Abzeichen.</p>
+      <dl class="spec">
+        <div><dt>Alter</dt><dd>ab Einschulung</dd></div>
+        <div><dt>Dauer</dt><dd>6–11 × 45 Min.</dd></div>
+        <div><dt>Gruppe</dt><dd>max. 12 Kinder</dd></div>
+        <div><dt>Wann</dt><dd>Samstag</dd></div>
+        <div><dt>Preis</dt><dd class="num">12,50 € / Termin</dd></div>
+      </dl>
+      <p class="small muted">Pro Termin 12 € Kursgebühr plus 0,50 € Eintritt. Wie viele Termine ein Kurs hat (6 bis 11), hängt vom Saisonstart und den Wochenenden zwischen den Ferien ab. Dazu kommen 5 € für das Abzeichen. Den 50-€-Gutschein gibt es nicht mehr. Bereits eingereichte Gutscheine haben wir schon vor längerer Zeit weitergegeben; sobald das Geld bei uns ankommt, erstatten wir es dir direkt zurück.</p>
+    </div>
+    <div class="stack">
+      <figure class="photo" style="margin: 0"><img src="assets/img/nudel-800.webp" srcset="assets/img/nudel-800.webp 800w, assets/img/nudel-1600.webp 1600w" sizes="(max-width: 640px) 100vw, 50vw" width="800" height="663" alt="Ein Kind mit Schwimmflügeln hält sich an einer Poolnudel fest, davor ein roter Ball" loading="lazy"><figcaption>Lang ist’s her: unser sportlicher Leiter beim Schwimmenlernen.</figcaption></figure>
+      <h3>Was dein Kind lernt</h3>
+      <ul class="feature-list">
+        <li><span><b>Wasser­gewöhnung:</b> Gesicht ins Wasser, ausatmen, gleiten, Vertrauen fassen.</span></li>
+        <li><span><b>Brustschwimmen:</b> Arme und Beine im Takt, erst mit Hilfe, dann frei.</span></li>
+        <li><span><b>Springen und Tauchen:</b> Sprung vom Beckenrand, einen Gegenstand aus schultertiefem Wasser holen.</span></li>
+        <li><span><b>Baderegeln:</b> Kennen und verstehen, damit es auch im Urlaub sicher bleibt.</span></li>
+      </ul>
+      <div class="callout"><b>Ablauf am Samstag</b><span>Die Kurse laufen samstags um 10:00 und 11:00 Uhr. Zwei Kursleitungen und mehrere Assistenzen betreuen die Kinder.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="aufbaukurs" aria-labelledby="auf-titel">
+  <div class="wrap grid-2">
+    <div class="stack">
+      <p class="eyebrow">Das letzte Stück</p>
+      <h2 id="auf-titel">Aufbaukurs</h2>
+      <p class="lead">Manchmal fehlen nach dem Kurs nur noch ein paar Meter. Dann gibt es den Aufbaukurs, samstags um 9:00 Uhr.</p>
+      <dl class="spec">
+        <div><dt>Für</dt><dd>Kursteilnehmer</dd></div>
+        <div><dt>Dauer</dt><dd>bis 5 × 45 Min.</dd></div>
+        <div><dt>Wann</dt><dd>Sa 9:00</dd></div>
+        <div><dt>Preis</dt><dd class="num">12,50 € / Termin</dd></div>
+      </dl>
+      <p class="small muted">Weniger als 6 Termine zu je 12 € plus 0,50 € Eintritt. Nur nach Empfehlung der Kursleitung.</p>
+    </div>
+    <div class="stack" id="robby">
+      <p class="eyebrow">Für die Kleinsten</p>
+      <h2>Robby-Kurs</h2>
+      {{kurs-status:Robby-Kurs}}
+      <p>Wassergewöhnung für Kinder von 4 bis 6 Jahren: spielerisch, ohne Leistungsdruck, mit höchstens 10 Kindern. Preis wie beim Seepferdchenkurs: 12,50 € pro Termin. Der Kurs ist derzeit ausgesetzt. Mit der Infomail erfährst du, wenn er wieder startet.</p>
+      <div class="actions"><a class="btn btn-ghost" href="infomail.html">Infomail bestellen</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section band-tile" aria-labelledby="anm-titel">
+  <div class="wrap grid-2">
+    <div class="stack">
+      <p class="eyebrow">So kommst du zu einem Platz</p>
+      <h2 id="anm-titel">Anmeldung &amp; Warteliste</h2>
+      <ol class="feature-list">
+        <li><span><b>Eintragen:</b> Dein Kind kommt mit dem Formular auf die Warteliste. Du bekommst eine Eingangsbestätigung.</span></li>
+        <li><span><b>Warten:</b> Wir vergeben Plätze nach Eingangsdatum. Kinder aus Fischach und den Gemeinden in unserem direkten Einzugsgebiet haben Vorrang. Kinder aus Orten mit eigenen Schwimmkursen anderer Vereine kommen nachrangig zum Zug. Gerade sind Kinder bis Jahrgang 2021 an der Reihe, rund 150 Kinder warten. Das kann dauern.</span></li>
+        <li><span><b>Platz bekommen:</b> Die Kursleitung meldet sich per Mail mit Termin und Zahlungsinfos.</span></li>
+      </ol>
+    </div>
+    <div class="callout sun">
+      <b>Lieber per Mail?</b>
+      <span>Das geht weiterhin: Schreib an <a href="mailto:schwimmkurs@tsv-fischach-schwimmen.de">schwimmkurs@tsv-fischach-schwimmen.de</a> mit Name und Geburtsdatum des Kindes und dem Einschulungsjahr.</span>
+      <div class="actions" style="margin-top: .5rem"><a class="btn btn-deep" href="warteliste.html">Zum Formular</a></div>
+    </div>
+  </div>
+</section>

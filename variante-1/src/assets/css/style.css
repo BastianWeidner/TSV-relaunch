@@ -1,0 +1,254 @@
+/* TSV Fischach Schwimmen – Variante 1, nah an der alten Seite:
+   Weiß mit viel Luft, Grautöne, Menü in kleinen gesperrten Großbuchstaben,
+   Farbe kommt aus den Fotos und dem Logo. Eine Schrift (Montserrat, lokal). */
+
+@font-face { font-family: "Montserrat"; font-weight: 300; font-display: swap; src: url("../fonts/montserrat-latin-300-normal.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 400; font-display: swap; src: url("../fonts/montserrat-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 500; font-display: swap; src: url("../fonts/montserrat-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Montserrat"; font-weight: 600; font-display: swap; src: url("../fonts/montserrat-latin-600-normal.woff2") format("woff2"); }
+
+:root {
+  --weiss: #ffffff;
+  --flaeche: #f5f6f7;      /* abgesetzte Bereiche, leicht kühles Grau */
+  --linie: #e4e7ea;
+  --text: #333638;
+  --text-leise: #676c70;
+  --menue: #8f959a;
+  --akzent: #2a86a8;       /* Poolblau aus den Fotos, nur für Links */
+  --akzent-dunkel: #1d6582;
+  --rot: #d62b2b;          /* Rot aus dem Fischacher Wappen, sehr sparsam */
+  --platzhalter: #fff4c2;
+
+  --schrift: "Montserrat", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --breite: 1140px;
+  --text-breite: 68ch;
+  --rand: max(16px, env(safe-area-inset-left, 0px));
+  --rand-r: max(16px, env(safe-area-inset-right, 0px));
+  color-scheme: light;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--weiss);
+  color: var(--text);
+  font-family: var(--schrift);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--akzent); text-underline-offset: 0.18em; }
+a:hover { color: var(--akzent-dunkel); }
+:focus-visible { outline: 2px solid var(--akzent); outline-offset: 3px; }
+
+h1, h2, h3 { font-weight: 300; line-height: 1.25; color: var(--text); text-wrap: balance; margin: 0 0 0.6em; }
+h1 { font-size: clamp(1.9rem, 1.4rem + 2vw, 2.8rem); }
+h2 { font-size: clamp(1.4rem, 1.2rem + 0.9vw, 1.85rem); }
+h3 { font-size: 1.15rem; font-weight: 500; }
+p, ul, ol { margin: 0 0 1em; }
+.einleitung { font-size: 1.15rem; font-weight: 300; max-width: var(--text-breite); }
+.leise, .hinweis { color: var(--text-leise); }
+.hinweis { font-size: 0.9em; }
+
+/* Etikett: kleine gesperrte Großbuchstaben wie Menü und Karten der alten Seite */
+.etikett {
+  font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--menue);
+}
+
+/* noch zu füllende Angaben, fallen in der Vorschau sofort auf */
+.platzhalter {
+  background: var(--platzhalter); border: 1px dashed #c9a400; border-radius: 3px;
+  padding: 0 0.35em; font-size: 0.85em; color: #6b5700; white-space: normal;
+}
+.platzhalter::before { content: "✎ "; }
+
+.sprungmarke { position: absolute; left: -9999px; }
+.sprungmarke:focus { left: 16px; top: 16px; z-index: 100; background: var(--weiss); padding: 8px 12px; }
+
+/* ---------- Kopf ---------- */
+.kopf { background: var(--weiss); border-bottom: 1px solid var(--linie); position: relative; z-index: 20; }
+.kopf-innen {
+  max-width: var(--breite); margin: 0 auto;
+  padding-block: 12px; padding-left: var(--rand); padding-right: var(--rand-r);
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+}
+.marke { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text); line-height: 1.25; }
+.marke img { width: 72px; }
+.marke span { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-leise); }
+.marke strong { font-weight: 600; color: var(--text); font-size: 0.85rem; }
+.marke:hover { color: var(--text); }
+
+.menue ul { list-style: none; margin: 0; padding: 0; }
+.menue a {
+  display: block; text-decoration: none; color: var(--menue);
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+  padding: 10px 14px;
+}
+.menue a:hover, .menue a.aktiv { color: var(--text); }
+.menue-schalter { position: absolute; opacity: 0; pointer-events: none; }
+.menue-knopf { display: none; }
+
+@media (min-width: 900px) {
+  .menue > ul { display: flex; }
+  .menue li { position: relative; }
+  .menue li ul {
+    display: none; position: absolute; left: 0; top: 100%; min-width: 230px;
+    background: var(--weiss); border: 1px solid var(--linie); box-shadow: 0 8px 24px rgba(30, 40, 50, 0.08);
+    padding-block: 8px;
+  }
+  .menue li:hover > ul, .menue li:focus-within > ul { display: block; }
+  .menue li ul a { letter-spacing: 0.1em; padding: 8px 18px; }
+}
+
+@media (max-width: 899.98px) {
+  .menue-knopf {
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text);
+    padding: 10px 4px;
+  }
+  .menue-knopf span, .menue-knopf span::before, .menue-knopf span::after {
+    display: block; width: 22px; height: 2px; background: var(--text); position: relative;
+  }
+  .menue-knopf span::before, .menue-knopf span::after { content: ""; position: absolute; left: 0; }
+  .menue-knopf span::before { top: -7px; }
+  .menue-knopf span::after { top: 7px; }
+  .menue-schalter:focus-visible + .menue-knopf { outline: 2px solid var(--akzent); outline-offset: 3px; }
+  .kopf-innen { flex-wrap: wrap; }
+  .menue { display: none; flex-basis: 100%; border-top: 1px solid var(--linie); padding-block: 8px; }
+  .menue-schalter:checked ~ .menue { display: block; }
+  .menue li ul a { padding-left: 32px; text-transform: none; letter-spacing: 0.04em; font-size: 0.9rem; }
+}
+
+/* ---------- Titelbilder ---------- */
+.held {
+  position: relative; min-height: min(78vh, 680px); display: grid; align-items: center;
+  background: #1d3440 center / cover no-repeat; color: var(--weiss); overflow: hidden;
+}
+.held > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.held::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(10, 25, 35, 0.55), rgba(10, 25, 35, 0.1) 70%); }
+.held-text {
+  position: relative; z-index: 1; width: 100%; max-width: var(--breite); margin: 0 auto;
+  padding-block: 64px; padding-left: var(--rand); padding-right: var(--rand-r);
+}
+.held h1 { color: var(--weiss); font-size: clamp(2.2rem, 1.5rem + 3.2vw, 3.9rem); margin-bottom: 0.2em; }
+.held .unterzeile { font-size: clamp(1rem, 0.9rem + 0.5vw, 1.3rem); font-weight: 300; margin: 0 0 1.4em; }
+.held .etikett { color: rgba(255, 255, 255, 0.88); }
+
+.titelbild { height: clamp(180px, 32vw, 380px); overflow: hidden; background: var(--flaeche); }
+.titelbild img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Inhalt ---------- */
+.abschnitt {
+  max-width: var(--breite); margin: 0 auto;
+  padding-block: clamp(40px, 6vw, 72px); padding-left: var(--rand); padding-right: var(--rand-r);
+}
+.abschnitt.schmal > * { max-width: var(--text-breite); }
+.abschnitt + .abschnitt { padding-top: 0; }
+.grau { background: var(--flaeche); }
+.grau .abschnitt + .abschnitt { padding-top: clamp(40px, 6vw, 72px); }
+
+.ausblick {
+  border: 1px solid var(--linie); border-left: 3px solid var(--akzent);
+  padding: 24px 28px; max-width: 820px;
+}
+.ausblick h2 { font-size: 1.3rem; font-weight: 500; }
+.ausblick p:last-child { margin-bottom: 0; }
+
+.karten { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 32px; }
+.karte { display: flex; flex-direction: column; gap: 14px; text-decoration: none; color: var(--text); }
+.karte img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; transition: opacity 0.2s; }
+.karte:hover img { opacity: 0.88; }
+.karte h3 { font-size: 1.35rem; font-weight: 300; margin: 0; }
+.karte .etikett { line-height: 1.7; }
+.karte:hover h3 { color: var(--akzent-dunkel); }
+
+.tabelle-rahmen { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+.zeiten { max-width: 820px; }
+.zeiten th, .zeiten td { text-align: left; padding: 12px 16px 12px 0; border-bottom: 1px solid var(--linie); vertical-align: top; }
+.zeiten thead th { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--menue); }
+.zeiten tbody th { font-weight: 500; width: 9.5em; }
+.zeiten .zeit { white-space: nowrap; color: var(--text-leise); text-align: right; padding-right: 0; }
+.zeiten tr.frei th, .zeiten tr.frei td { color: var(--menue); font-weight: 400; }
+.zeiten a { color: var(--text); }
+.zeiten a:hover { color: var(--akzent); }
+
+.zwei-spalten { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px 56px; }
+.zwei-spalten > * { min-width: 0; }
+
+.terminliste { list-style: none; padding: 0; }
+.terminliste li { padding: 8px 0; border-bottom: 1px solid var(--linie); font-variant-numeric: tabular-nums; }
+.terminliste .tag { display: inline-block; min-width: 6.5em; font-weight: 500; }
+
+.rollen { list-style: none; padding: 0; display: grid; gap: 2px; }
+.rollen li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; padding: 8px 0; border-bottom: 1px solid var(--linie); }
+.rollen li span:first-child { color: var(--text-leise); }
+
+.anmeldung { border-top: 1px solid var(--linie); padding-top: 32px; margin-top: 16px; max-width: var(--text-breite); }
+
+.preise { max-width: 760px; }
+.preise th, .preise td { text-align: left; padding: 10px 16px 10px 0; border-bottom: 1px solid var(--linie); vertical-align: top; }
+.preise td:last-child { text-align: right; white-space: nowrap; padding-right: 0; }
+.preise caption { text-align: left; caption-side: top; padding-bottom: 8px; }
+.preise + .preise { margin-top: 40px; }
+
+.bild-text { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; align-items: start; }
+.bild-text > * { min-width: 0; }
+
+.kasten { background: var(--flaeche); padding: 20px 24px; }
+.kasten p:last-child { margin-bottom: 0; }
+.hinweis-aus { border-left: 3px solid var(--rot); padding: 4px 0 4px 18px; }
+
+/* ---------- Fuß ---------- */
+.fuss { border-top: 1px solid var(--linie); }
+.fuss-innen {
+  max-width: var(--breite); margin: 0 auto;
+  padding-block: 28px; padding-left: var(--rand); padding-right: var(--rand-r);
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 32px;
+}
+.fuss-logo img { width: 56px; }
+.fuss nav { display: flex; flex-wrap: wrap; gap: 4px 24px; }
+.fuss nav a {
+  color: var(--menue); text-decoration: none;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.fuss nav a:hover { color: var(--text); }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+.schmal-text { max-width: var(--text-breite); }
+.tabelle-rahmen + .tabelle-rahmen { margin-top: 40px; }
+.preise td + td, .preise th + th { text-align: right; padding-left: 12px; }
+.preise th { font-weight: 500; }
+.zeiten thead th:last-child { text-align: right; padding-right: 0; }
+@media (max-width: 899.98px) {
+  .marke img { width: 52px; }
+  .marke span { font-size: 0.66rem; letter-spacing: 0.1em; }
+  .marke strong { font-size: 0.8rem; }
+  .kopf-innen { gap: 8px 16px; }
+}
+@media (max-width: 600px) {
+  .zeiten { font-size: 0.9rem; }
+  .zeiten tbody th { width: auto; padding-right: 10px; }
+  .zeiten .uhr { display: none; }
+  .zeiten th, .zeiten td { padding-right: 10px; }
+  .preise { font-size: 0.92rem; }
+  .preise thead th { letter-spacing: 0.06em; font-size: 0.66rem; }
+  .preise td + td { padding-left: 8px; }
+}
+@media (max-width: 600px) {
+  .zeiten td { hyphens: auto; -webkit-hyphens: auto; }
+  .zeiten thead th { letter-spacing: 0.08em; }
+}
+h1, h2 { hyphens: auto; -webkit-hyphens: auto; }
+@media (max-width: 600px) {
+  .preise td:first-child { hyphens: auto; -webkit-hyphens: auto; }
+  .preise thead th { font-size: 0.6rem; letter-spacing: 0.04em; }
+}
+.downloads { margin-top: 24px; }
+.downloads h3 { margin-bottom: 0.4em; }
+.downloads ul { list-style: none; padding: 0; margin-bottom: 0.6em; }
+.downloads li { padding: 6px 0; }
+.downloads li a::before { content: "↓ "; }

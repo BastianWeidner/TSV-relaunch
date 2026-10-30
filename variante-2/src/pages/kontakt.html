@@ -1,0 +1,67 @@
+<!-- {"title": "Kontakt & Anfahrt", "description": "So erreichst du die Schwimmabteilung des TSV Fischach: Mailadressen für Kurse, Schnuppertraining und allgemeine Fragen, Kontaktformular und Anfahrt.", "nav": "kontakt"} -->
+<section class="hero hero-small">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="color: var(--sun)">Alle hier arbeiten ehrenamtlich</p>
+      <h1>Kontakt</h1>
+      <p class="lead">Damit deine Nachricht bei der richtigen Person landet, gibt es eigene Adressen für jedes Thema. Bitte melde dich nicht über private Adressen oder Telefonnummern von Trainern an.</p>
+    </div>
+    <img class="hero-logo" src="assets/img/logo-320.webp" width="320" height="248" alt="">
+  </div>
+  {{> wave}}
+</section>
+
+<section class="section" aria-label="Mailadressen">
+  <div class="wrap contact-cards">
+    <div class="contact-card"><p class="eyebrow">Schwimmkurse</p><h3>Kurse &amp; Warteliste</h3><p class="muted">Anmeldung, Änderungen, Abmeldung von der Warteliste</p><a href="mailto:schwimmkurs@tsv-fischach-schwimmen.de">schwimmkurs@tsv-fischach-schwimmen.de</a></div>
+    <div class="contact-card"><p class="eyebrow">Training</p><h3>Schnuppertraining</h3><p class="muted">Für Kinder, die schon schwimmen können und in eine Gruppe möchten</p><a href="mailto:schnuppern@tsv-fischach-schwimmen.de">schnuppern@tsv-fischach-schwimmen.de</a></div>
+    <div class="contact-card"><p class="eyebrow">Erwachsene</p><h3>Bleib fit</h3><p class="muted">Wassergymnastik und Erwachsenenschwimmen: Anmeldung und Fragen</p><a href="mailto:bleib.fit@tsv-fischach-schwimmen.de">bleib.fit@tsv-fischach-schwimmen.de</a></div>
+    <div class="contact-card"><p class="eyebrow">Alles andere</p><h3>Allgemein</h3><p class="muted">Fragen, Vereinskleidung, Presse und Anregungen</p><a href="mailto:kontakt@tsv-fischach-schwimmen.de">kontakt@tsv-fischach-schwimmen.de</a><p class="muted small">Beschwerden direkt an die Abteilungsleitung: <a href="mailto:leitung@tsv-fischach-schwimmen.de">leitung@tsv-fischach-schwimmen.de</a></p></div>
+  </div>
+</section>
+
+<section class="section band" aria-labelledby="form-titel">
+  <div class="wrap grid-2">
+    <div class="stack">
+      <p class="eyebrow">Oder direkt hier</p>
+      <h2 id="form-titel">Nachricht schreiben</h2>
+      <p class="lead">Das Formular schickt deine Nachricht als Mail an die passende Adresse. Gespeichert wird auf der Website nichts.</p>
+      <div class="callout sun"><b>Anmeldung zum Schwimmkurs?</b><span>Dafür bitte das <a href="warteliste.html">Wartelisten-Formular</a> nutzen, dann landet dein Kind direkt in der Liste.</span></div>
+    </div>
+    <form class="form js-form" action="api/formular.php" method="post" novalidate>
+      <input type="hidden" name="formular" value="kontakt">
+      <div class="field">
+        <label for="kt-thema">Thema <span class="req">*</span></label>
+        <select id="kt-thema" name="thema" required>
+          <option value="allgemein">Allgemeine Frage</option>
+          <option value="schnuppern">Schnuppertraining</option>
+          <option value="erwachsene">Wassergymnastik / Erwachsenenschwimmen</option>
+          <option value="kleidung">Vereinskleidung</option>
+          <option value="abteilungsleitung">An die Abteilungsleitung</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="field"><label for="kt-name">Name <span class="req">*</span></label><input id="kt-name" name="name" required maxlength="80" autocomplete="name"></div>
+        <div class="field"><label for="kt-mail">E-Mail <span class="req">*</span></label><input id="kt-mail" name="email" type="email" required maxlength="120" autocomplete="email"></div>
+      </div>
+      <div class="field"><label for="kt-msg">Nachricht <span class="req">*</span></label><textarea id="kt-msg" name="nachricht" required maxlength="2000"></textarea></div>
+      <label class="check"><input type="checkbox" name="einwilligung" value="ja" required> <span>Meine Angaben werden zur Beantwortung per Mail weitergeleitet. Mehr in der <a href="datenschutz.html#kontakt">Datenschutzerklärung</a>. <span class="req">*</span></span></label>
+      <div class="hp" aria-hidden="true"><label for="kt-web">Bitte leer lassen</label><input id="kt-web" name="website" tabindex="-1" autocomplete="off"></div>
+      <button class="btn btn-sun" type="submit">Nachricht senden</button>
+      <p class="form-status" role="status" hidden></p>
+    </form>
+  </div>
+</section>
+
+<section class="section" id="anfahrt" aria-labelledby="anfahrt-titel">
+  <div class="wrap grid-2">
+    <div class="stack">
+      <p class="eyebrow">Anfahrt</p>
+      <h2 id="anfahrt-titel">So findest du uns</h2>
+      <p class="lead">Schulschwimmbad Fischach<br>Hallenbad in der Grund- und Mittelschule<br>Mühlstraße 15, 86850 Fischach</p>
+            <div class="actions"><a class="btn btn-deep" href="https://www.openstreetmap.org/search?query=M%C3%BChlstra%C3%9Fe%2015%2C%2086850%20Fischach" rel="noopener">In OpenStreetMap öffnen</a></div>
+      <p class="small muted">Die Karte ist absichtlich nur verlinkt und nicht eingebettet. So gehen beim Besuch dieser Seite keine Daten an Kartendienste.</p>
+    </div>
+    <figure class="photo" style="margin: 0"><img src="assets/img/hallenbad-winter-800.webp" width="800" height="450" alt="Blick aus dem Hallenbad auf den verschneiten Ort" loading="lazy"></figure>
+  </div>
+</section>

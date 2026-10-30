@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{seitentitel}}</title>
+<meta name="description" content="{{beschreibung}}">
+<link rel="icon" type="image/png" href="{{root}}assets/img/favicon.png">
+<link rel="apple-touch-icon" href="{{root}}assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="{{root}}assets/css/style.css">
+</head>
+<body class="{{koerperklasse}}">
+<a class="sprungmarke" href="#inhalt">Zum Inhalt springen</a>
+<header class="kopf">
+  <div class="kopf-innen">
+    <a class="marke" href="{{root}}">
+      <img src="{{root}}assets/img/logo-tintenfisch-160.png" alt="" width="160" height="123">
+      <span><strong>TSV Fischach</strong><br>Abteilung Schwimmen</span>
+    </a>
+    <input type="checkbox" id="menue-schalter" class="menue-schalter" aria-label="Menü öffnen">
+    <label for="menue-schalter" class="menue-knopf" aria-hidden="true"><span></span>Menü</label>
+    <nav class="menue" aria-label="Hauptmenü">
+      <ul>{{menue}}</ul>
+    </nav>
+  </div>
+</header>
+{{titelbild}}
+<main id="inhalt">
+{{inhalt}}
+</main>
+<footer class="fuss">
+  <div class="fuss-innen">
+    <a class="fuss-logo" href="{{root}}"><img src="{{root}}assets/img/logo-tintenfisch-160.png" alt="TSV Fischach Schwimmen, zur Startseite" width="80" height="62"></a>
+    <nav aria-label="Rechtliches">
+      <a href="{{root}}kontakt/">Kontakt</a>
+      <a href="{{root}}impressum/">Impressum</a>
+      <a href="{{root}}datenschutz/">Datenschutz</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

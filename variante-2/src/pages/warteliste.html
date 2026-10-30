@@ -1,0 +1,89 @@
+<!-- {"title": "Warteliste Schwimmkurse", "description": "Kind für einen Schwimmkurs beim TSV Fischach auf die Warteliste setzen.", "nav": "warteliste"} -->
+<section class="hero hero-small">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow" style="color: var(--sun)">Schwimmkurse für Kinder</p>
+      <h1>Warteliste</h1>
+      <p class="lead">Trag dein Kind hier ein. Wir vergeben Plätze nach Anmeldung. Kinder aus Fischach und unserem direkten Einzugsgebiet haben dabei Vorrang. Wir melden uns per Mail, sobald ein Platz frei ist.</p>
+    </div>
+    <img class="hero-logo" src="assets/img/logo-320.webp" width="320" height="248" alt="">
+  </div>
+  {{> wave}}
+</section>
+
+<section class="section">
+  <div class="wrap grid-2">
+    <form class="form js-form" action="api/formular.php" method="post" novalidate>
+      <input type="hidden" name="formular" value="warteliste">
+      <h3>Kind eintragen</h3>
+      <div class="field">
+        <label for="wl-kurs">Kurs <span class="req">*</span></label>
+        <select id="wl-kurs" name="kurs" required>
+          <option value="Seepferdchenkurs">Seepferdchenkurs (ab Einschulung)</option>
+          <option value="Robby-Kurs">Robby-Kurs (4–6 Jahre, derzeit ausgesetzt: Interessenliste)</option>
+        </select>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="wl-kind">Name des Kindes <span class="req">*</span></label>
+          <input id="wl-kind" name="kind_name" required maxlength="80" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="wl-geb">Geburtsdatum <span class="req">*</span></label>
+          <input id="wl-geb" name="kind_geburtsdatum" type="date" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="wl-schule">Einschulungsjahr <span class="req">*</span></label>
+        <select id="wl-schule" name="einschulung" required>
+          <option value="">Bitte wählen</option>
+          <option>2025 oder früher</option><option>2026</option><option>2027</option><option>2028</option><option>2029</option><option>2030</option>
+        </select>
+        <span class="hint">Wir sortieren die Warteliste nach Anmeldung und planen die Gruppen nach Jahrgängen.</span>
+      </div>
+      <div class="field">
+        <label for="wl-ort">Wohnort des Kindes (PLZ und Ort) <span class="req">*</span></label>
+        <input id="wl-ort" name="wohnort" required maxlength="80" autocomplete="address-level2" placeholder="86850 Fischach">
+        <span class="hint">Kinder aus Fischach und den Gemeinden in unserem direkten Einzugsgebiet haben Vorrang. Kinder aus Orten, in denen ein anderer Verein Schwimmkurse anbietet, kommen nachrangig zum Zug. Der Wohnort kann stichprobenartig geprüft werden.</span>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label for="wl-eltern">Dein Name (erziehungsberechtigt) <span class="req">*</span></label>
+          <input id="wl-eltern" name="name" required maxlength="80" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="wl-mail">E-Mail <span class="req">*</span></label>
+          <input id="wl-mail" name="email" type="email" required maxlength="120" autocomplete="email">
+        </div>
+      </div>
+      <div class="field">
+        <label for="wl-tel">Telefon <span class="muted">(freiwillig)</span></label>
+        <input id="wl-tel" name="telefon" type="tel" maxlength="40" autocomplete="tel">
+        <span class="hint">Nur für kurzfristige Rückfragen, z.&nbsp;B. wenn ein Platz frei wird.</span>
+      </div>
+      <div class="field">
+        <label for="wl-msg">Hinweise für die Kursleitung <span class="muted">(freiwillig)</span></label>
+        <textarea id="wl-msg" name="nachricht" maxlength="800" placeholder="z. B. Geschwisterkind im selben Kurs, Wunschuhrzeit"></textarea>
+        <span class="hint">Bitte keine Gesundheitsdaten hier eintragen. Das besprechen wir persönlich.</span>
+      </div>
+      <label class="check"><input type="checkbox" name="einwilligung" value="ja" required> <span>Ich bin erziehungsberechtigt und einverstanden, dass die Abteilung diese Angaben zur Vergabe der Kursplätze speichert. Meine Angabe zum Wohnort ist richtig. Sie werden gelöscht, wenn mein Kind einen Platz hatte oder ich mich abmelde, spätestens nach 24 Monaten. Mehr in der <a href="datenschutz.html#warteliste">Datenschutzerklärung</a>. <span class="req">*</span></span></label>
+      <div class="hp" aria-hidden="true"><label for="wl-web">Bitte leer lassen</label><input id="wl-web" name="website" tabindex="-1" autocomplete="off"></div>
+      <button class="btn btn-sun" type="submit">Auf die Warteliste setzen</button>
+      <p class="form-status" role="status" hidden></p>
+    </form>
+    <div class="stack">
+      <div class="callout">
+        <b>Was passiert danach?</b>
+        <span>Du bekommst eine Bestätigung per Mail. Deine Angaben gehen nur an die Kursleitung, nicht an Dritte. Wenn ein Platz frei wird, melden wir uns mit Termin und Zahlungsinfos.</span>
+      </div>
+      <div class="callout">
+        <b>Schon eingetragen?</b>
+        <span>Bitte nicht doppelt anmelden, sonst rutscht niemand nach vorne. Änderungen oder Abmeldung einfach an <a href="mailto:schwimmkurs@tsv-fischach-schwimmen.de">schwimmkurs@tsv-fischach-schwimmen.de</a>.</span>
+      </div>
+      <div class="callout sun">
+        <b>Dein Kind kann schon schwimmen?</b>
+        <span>Für die Trainingsgruppen gibt es eine eigene Warteliste. Frag ein Schnuppertraining über <a href="mailto:schnuppern@tsv-fischach-schwimmen.de">schnuppern@tsv-fischach-schwimmen.de</a> an.</span>
+      </div>
+    </div>
+  </div>
+</section>
