@@ -4,6 +4,8 @@
  * =====================================================================
  * Ein einzelnes Skript ohne Datenbank. Es prüft die Eingaben und verschickt sie
  * als Mail an die zuständige Funktionsadresse. Auf dem Server wird nichts gespeichert.
+ * Wartelisten-Mails haben zusätzlich den Anhang anmeldung.csv, den die Schwimmkurs-App
+ * direkt einliest (Kinder › Aus Excel/CSV, mehrere Anhänge auf einmal möglich).
  *
  * Vor dem Einschalten (siehe DATENSCHUTZ-KONZEPT.md):
  *   1. AV-Vertrag mit Strato abschließen, Datenschutzerklärung freigeben lassen.
@@ -107,21 +109,50 @@ function zeile(string $s): string {
     return preg_replace('/[\r\n]+/', ' ', $s);
 }
 
-function senden(string $an, string $betreff, string $text, ?string $antwortAn = null): bool {
-    $kopf = [
-        'From: TSV Fischach Schwimmen <' . ABSENDER . '>',
-        'Content-Type: text/plain; charset=utf-8',
-        'Content-Transfer-Encoding: 8bit',
-    ];
+/** $anhang = [Dateiname, Inhalt]: dann geht die Mail als multipart/mixed mit dieser Datei raus. */
+function senden(string $an, string $betreff, string $text, ?string $antwortAn = null, ?array $anhang = null): bool {
+    $kopf = ['From: TSV Fischach Schwimmen <' . ABSENDER . '>'];
     if ($antwortAn) {
         $kopf[] = 'Reply-To: ' . zeile($antwortAn);
     }
+    if ($anhang) {
+        [$datei, $inhalt] = $anhang;
+        $grenze = 'tsv-' . bin2hex(random_bytes(12));
+        $kopf[] = 'MIME-Version: 1.0';
+        $kopf[] = "Content-Type: multipart/mixed; boundary=\"$grenze\"";
+        $text = "--$grenze\r\nContent-Type: text/plain; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n$text\r\n"
+            . "--$grenze\r\nContent-Type: text/csv; charset=utf-8; name=\"$datei\"\r\n"
+            . "Content-Transfer-Encoding: base64\r\nContent-Disposition: attachment; filename=\"$datei\"\r\n\r\n"
+            . chunk_split(base64_encode($inhalt)) . "--$grenze--\r\n";
+    } else {
+        $kopf[] = 'Content-Type: text/plain; charset=utf-8';
+        $kopf[] = 'Content-Transfer-Encoding: 8bit';
+    }
     $betreff = '=?UTF-8?B?' . base64_encode(zeile($betreff)) . '?=';
     if (getenv('FORMULAR_TESTMODUS')) {  // lokal: Mail in die Fehlerausgabe statt senden
-        error_log("MAIL an $an | $betreff\n$text");
+        error_log("MAIL an $an | $betreff\n" . implode("\n", $kopf) . "\n\n$text");
         return true;
     }
     return mail($an, $betreff, $text, implode("\r\n", $kopf), '-f' . ABSENDER);
+}
+
+/**
+ * Anhang für die Schwimmkurs-App: eine Zeile, Spaltennamen so, dass die App sie ohne Zuordnen erkennt.
+ * Semikolon und BOM, damit auch Excel die Datei richtig öffnet. Führendes = oder @ wird entschärft.
+ */
+function anmeldung_csv(array $w): string {
+    $zeilen = [
+        ['Anmeldedatum', 'Name des Kindes', 'Geburtsdatum', 'Einschulung', 'PLZ und Ort', 'Elternteil', 'E-Mail',
+            'Telefon', 'Bemerkung Kurswunsch', 'Bemerkung'],
+        [date('d.m.Y'), $w['kind_name'], $w['kind_geburtsdatum'], $w['einschulung'], $w['wohnort'], $w['name'],
+            $w['email'], $w['telefon'], 'Kurswunsch: ' . $w['kurs'], str_replace("\n", ' ', $w['nachricht'])],
+    ];
+    $f = fopen('php://temp', 'r+');
+    foreach ($zeilen as $z) {
+        fputcsv($f, array_map(fn($v) => preg_match('/^[=@]/', $v) ? "'" . $v : $v, $z), ';', '"', '', "\r\n");
+    }
+    rewind($f);
+    return "\u{FEFF}" . stream_get_contents($f);
 }
 
 function token(string $email, array $themen, int $zeit): string {
@@ -232,7 +263,11 @@ if ($formular === 'warteliste') {
     $text .= "\nBitte in die Warteliste übernehmen. Löschfrist: nach Kursteilnahme bzw. spätestens 24 Monate.\n";
 }
 
-if (!senden($an, $titel, $text, $werte['email'])) {
+$anhang = $formular === 'warteliste' ? ['anmeldung.csv', anmeldung_csv($werte)] : null;
+if ($formular === 'warteliste') {
+    $text .= "Anhang anmeldung.csv: in der Schwimmkurs-App unter Kinder › Aus Excel/CSV einlesen.\n";
+}
+if (!senden($an, $titel, $text, $werte['email'], $anhang)) {
     antwort(false, 'Das Senden hat nicht geklappt. Bitte schreib uns direkt eine Mail.', 500);
 }
 
