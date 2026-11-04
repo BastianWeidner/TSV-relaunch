@@ -24,6 +24,8 @@ des Hauptvereins) prüfen lassen, bevor ein Formular eingeschaltet wird.
 
 ## Kinderdaten (Warteliste)
 
+- Die Wartelisten-Mail hat einen Anhang `anmeldung.csv` mit denselben Angaben wie der Mailtext (keine zusätzlichen Daten). Die Kursleitung liest ihn in die Schwimmkurs-App ein (Kinder › Aus Excel/CSV, mehrere Anhänge auf einmal). Gespeichert wird er nur im Postfach und in der App, nicht auf dem Server und nicht auf GitHub.
+
 - Datensparsam: Wohnort nur als PLZ und Ort (für den Vorrang des Einzugsgebiets, stichprobenartig prüfbar), keine Straße, keine Gesundheitsdaten (Hinweis am Freitextfeld), kein Foto.
 - Pflicht-Häkchen: erziehungsberechtigt + Einverständnis, mit Löschfrist im Text.
 - Zugriff nur Kursleitung. Das Postfach schwimmkurs@ sollte nur diese Personen haben,

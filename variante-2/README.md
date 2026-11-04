@@ -17,6 +17,8 @@ src/data/zeiten.json     Alle Trainingszeiten – EINZIGE Stelle zum Ändern
 src/data/hinweis.json    Gelber "Aktuell"-Kasten auf der Startseite
 src/data/site.json       Link zum Google Sheet (Kursliste)
 src/data/kurse-beispiel.csv  Beispiel-Kursliste, solange kein Sheet verknüpft ist
+src/data/zeiten-app.json  (optional) Trainingszeiten aus der Schwimmgruppen-App
+src/data/kurse-app.csv   (optional) Kursliste aus der Schwimmkurs-App
 src/assets/              CSS, JS (eine Datei), Bilder (WebP), Schriften (lokal, OFL)
 src/static/              .htaccess (HTTPS, Weiterleitungen alter URLs, Sicherheit), robots.txt
 api/formular.php         Formular-Backend (Stub, AKTIV = false)
@@ -42,8 +44,25 @@ werden müssen. Der Build zählt sie.
 - **Trainingszeit ändern:** `src/data/zeiten.json` bearbeiten, `python3 build.py`, hochladen.
   Startseite, Trainingsseite und Erwachsenenseite passen sich automatisch an.
 - **Hinweis "Aktuell":** `src/data/hinweis.json`. Mit `"titel": ""` verschwindet der Kasten.
-- **Kursliste:** im Google Sheet pflegen, dann `python3 build.py` (siehe unten).
+- **Kursliste:** im Google Sheet pflegen oder aus der Schwimmkurs-App speichern, dann `python3 build.py` (siehe unten).
 - **Preise:** `src/pages/preise.html` und die Produktkarten auf `index.html`.
+
+## Daten aus den Schwimm-Apps
+
+Die Schwimm-Apps erzeugen die Website-Daten selbst, ohne Namen oder Kontakte:
+
+- **Schwimmgruppen** → Mehr › „Für die Website“ › *Trainingszeiten speichern* → `zeiten-app.json`
+- **Schwimmkurs** → Einstellungen › „Für die Website“ › *Kursliste speichern* → `kurse-app.csv`
+
+Die Datei auf GitHub unter `variante-2/src/data/` hochladen (Add file › Upload files, gleicher Name
+überschreibt), dann bauen und hochladen wie gewohnt.
+
+- `zeiten-app.json` ersetzt nur die Termine der Gruppen, die darin stehen. Namen, Seiten und
+  Zusätze wie „mit Anmeldung“ bleiben aus `zeiten.json`, die Schwimmkurs-Zeiten auch.
+  Eine Gruppe, die es auf der Website noch nicht gibt, wird übersprungen (der Build sagt welche);
+  dafür in `zeiten.json` unter `gruppen` einen Eintrag ergänzen.
+- `kurse-app.csv` hat Vorrang vor dem Google Sheet. `--sheet URL` oder `--beispiel` gehen weiterhin vor.
+  Die Datei durchläuft dieselbe Spaltenprüfung wie das Sheet.
 
 ## Kursliste aus Google Sheets
 

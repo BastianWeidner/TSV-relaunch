@@ -4,6 +4,10 @@
     python3 build.py                 # baut mit den Daten aus src/data/
     python3 build.py --sheet URL     # holt die Kursliste vorher aus dem Google Sheet (CSV)
     python3 build.py --beispiel      # nimmt die Beispiel-Kursliste statt des Google Sheets
+
+Aus den Schwimm-Apps (Knopf „Für die Website“), falls vorhanden:
+    src/data/zeiten-app.json   Trainingszeiten aus Schwimmgruppen, ersetzen die Termine dieser Gruppen
+    src/data/kurse-app.csv     Kursliste aus Schwimmkurs, hat Vorrang vor dem Google Sheet
     python3 build.py --release       # bricht ab, solange noch Platzhalter (class="todo") drin sind
 
 Seiten liegen in src/pages/. Die erste Zeile jeder Seite ist ein Kommentar mit
@@ -50,9 +54,16 @@ def esc(s):
 
 # ---------- Kurse (Google Sheet oder Beispiel) ----------
 
-def read_courses(sheet_url):
+APP_KURSE = "kurse-app.csv"
+APP_ZEITEN = "zeiten-app.json"
+
+
+def read_courses(sheet_url, app_file=None):
     sample = False
-    if sheet_url:
+    if app_file:
+        print(f"Kursliste aus der Schwimmkurs-App: {app_file.name}")
+        text = app_file.read_text(encoding="utf-8-sig")
+    elif sheet_url:
         print(f"Lade Kursliste: {sheet_url}")
         try:
             with urllib.request.urlopen(sheet_url, timeout=20) as r:
@@ -117,6 +128,31 @@ def course_status(rows, kurs):
 
 
 # ---------- Trainingszeiten ----------
+
+def merge_app_times(z):
+    """Ersetzt die Termine der Gruppen, die in zeiten-app.json stehen. Namen, Seiten und Zusätze
+    ("mit Anmeldung") bleiben aus zeiten.json; Gruppen, die die Website nicht kennt, werden übersprungen."""
+    f = SRC / "data" / APP_ZEITEN
+    if not f.exists():
+        return z
+    app = json.loads(f.read_text(encoding="utf-8"))
+    termine = [t for t in app.get("termine", []) if t.get("tag") in TAGE]
+    unbekannt = sorted({t["gruppe"] for t in termine} - set(z["gruppen"]))
+    if unbekannt:
+        print(f"  Hinweis: {APP_ZEITEN} nennt Gruppen ohne Eintrag in zeiten.json, nicht übernommen: {', '.join(unbekannt)}")
+    termine = [t for t in termine if t["gruppe"] in z["gruppen"]]
+    ersetzt = {t["gruppe"] for t in termine}
+    zusatz = {(t["gruppe"], t["tag"]): t["zusatz"] for t in z["termine"] if t.get("zusatz")}
+    neu = [t for t in z["termine"] if t["gruppe"] not in ersetzt]
+    for t in termine:
+        e = {k: t[k] for k in ("tag", "gruppe", "von", "bis")}
+        if (t["gruppe"], t["tag"]) in zusatz:
+            e["zusatz"] = zusatz[(t["gruppe"], t["tag"])]
+        neu.append(e)
+    neu.sort(key=lambda t: (TAGE.index(t["tag"]), t["von"]))
+    print(f"Trainingszeiten aus der Schwimmgruppen-App (Stand {app.get('stand', '?')}): {len(ersetzt)} Gruppen")
+    return {**z, "termine": neu}
+
 
 def render_week(z):
     by_day = {}
@@ -195,10 +231,12 @@ def include(text, depth=0):
 
 def build(sheet_url=None, release=False, beispiel=False):
     site = load_json("site.json")
-    zeiten = load_json("zeiten.json")
+    zeiten = merge_app_times(load_json("zeiten.json"))
     hinweis = load_json("hinweis.json")
+    app_kurse = SRC / "data" / APP_KURSE
+    app_kurse = app_kurse if app_kurse.exists() and not beispiel and not sheet_url else None
     url = None if beispiel else (sheet_url or site.get("kurse_csv_url") or None)
-    rows, sample = read_courses(url)
+    rows, sample = read_courses(url, app_kurse)
     today = dt.date.today().strftime("%d.%m.%Y")
 
     if DIST.exists():
