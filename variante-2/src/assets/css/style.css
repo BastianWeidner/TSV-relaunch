@@ -362,3 +362,9 @@ a.download:hover { border-color: var(--pool); color: var(--ink); }
 .download b { font-family: var(--font-display); font-size: 1.3rem; }
 .download .chip { margin-top: .3rem; }
 .download.is-missing { border-left-color: var(--line); }
+
+/* Nur in der GitHub-Pages-Vorschau (build.py --pages) */
+.preview-banner { background: var(--sun); color: var(--sun-ink); text-align: center; padding: .5rem 1rem; font-size: .9rem; line-height: 1.4; }
+.preview-banner a { color: inherit; font-weight: 800; }
+.form-inactive { background: color-mix(in srgb, var(--sun) 28%, var(--surface)); margin-bottom: 1rem; }
+form[data-vorschau] button[disabled] { opacity: .55; cursor: not-allowed; }

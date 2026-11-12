@@ -24,7 +24,7 @@
 
   // Formulare: per fetch senden, damit die Seite stehen bleibt.
   // Ohne JavaScript schickt der Browser das Formular normal ab (api/formular.php leitet auf danke.html).
-  document.querySelectorAll('form.js-form').forEach(function (form) {
+  document.querySelectorAll('form.js-form:not([data-vorschau])').forEach(function (form) {
     var status = form.querySelector('.form-status');
     function show(kind, text) {
       status.hidden = false;

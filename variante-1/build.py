@@ -4,6 +4,7 @@
 Nutzung:
     python3 build.py              # normaler Build für den Server
     python3 build.py --vorschau   # nach vorschau/, Links zeigen auf .../index.html (Öffnen ohne Webserver)
+    python3 build.py --pages      # Vorschau für GitHub Pages: Banner, noindex, alles relativ, ohne .htaccess
 
 Jede Seite in src/seiten/ ist ein HTML-Baustein. Die erste Zeile ist ein Kommentar mit
 JSON-Angaben, z. B.:
@@ -21,6 +22,7 @@ from pathlib import Path
 BASIS = Path(__file__).resolve().parent
 SRC = BASIS / "src"
 VORSCHAU = "--vorschau" in sys.argv
+PAGES = "--pages" in sys.argv  # temporäre Vorschau unter einem Unterpfad (GitHub Pages)
 DIST = BASIS / ("vorschau" if VORSCHAU else "dist")
 
 # Hauptmenü wie auf der alten Seite: (Titel, Pfad, Bereich, Untermenü)
@@ -42,6 +44,13 @@ MENUE = [
     ]),
     ("Kosten", "alle-kosten-auf-einem-blick/", "kosten", []),
 ]
+
+PAGES_BANNER = (
+    '<div role="note" style="background:#fff4c2;color:#3a3000;border-bottom:1px solid #c9a400;'
+    'padding:.5rem 1rem;font:500 .9rem/1.4 Montserrat,system-ui,sans-serif;text-align:center">'
+    '<strong>Vorschau</strong> – Entwurf „Variante 1“, noch nicht die offizielle Website. '
+    'Gelb markierte Stellen werden vor dem Livegang gefüllt. '
+    '<a href="{{root}}../" style="color:inherit">Zur Auswahl der Varianten</a></div>')
 
 WOCHENTAGE = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", "Sonntag"]
 
@@ -110,6 +119,8 @@ def baue_seite(datei, vorlage, zeiten):
     rel = datei.relative_to(SRC / "seiten")
     tiefe = len(rel.parts) - 1
     root = meta.get("root") or "../" * tiefe or "./"
+    if PAGES:  # unter /variante-1/ gibt es kein absolutes "/" der Website
+        root = "../" * tiefe or "./"
 
     while "{{baustein:" in inhalt:  # Bausteine dürfen selbst Bausteine enthalten
         inhalt = re.sub(r"\{\{baustein:([\w-]+)\}\}",
@@ -133,6 +144,10 @@ def baue_seite(datei, vorlage, zeiten):
              .replace("{{inhalt}}", inhalt)
              .replace("{{root}}", root))
 
+    if PAGES:
+        seite = seite.replace("</title>", '</title>\n<meta name="robots" content="noindex, nofollow">', 1)
+        seite = re.sub(r"(<body[^>]*>)", lambda m: m.group(1) + "\n" + PAGES_BANNER.replace("{{root}}", root), seite, count=1)
+
     if VORSCHAU:
         # ohne Webserver gibt es keine Verzeichnis-Indexseiten, also index.html anhängen
         seite = re.sub(r'href="(\.\.?/[^"#:]*/)(#[^"]*)?"', r'href="\1index.html\2"', seite)
@@ -151,7 +166,11 @@ def main():
         shutil.rmtree(alt) if alt.is_dir() else alt.unlink()
     shutil.copytree(SRC / "assets", DIST / "assets")
     for f in (SRC / "statisch").iterdir():
+        if PAGES and f.name == ".htaccess":
+            continue  # GitHub Pages kennt keine .htaccess
         shutil.copy(f, DIST / f.name)
+    if PAGES:
+        (DIST / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
 
     zeiten = lade_zeiten()
     vorlage = (SRC / "vorlage.html").read_text(encoding="utf-8")

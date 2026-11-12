@@ -4,6 +4,8 @@
     python3 build.py                 # baut mit den Daten aus src/data/
     python3 build.py --sheet URL     # holt die Kursliste vorher aus dem Google Sheet (CSV)
     python3 build.py --beispiel      # nimmt die Beispiel-Kursliste statt des Google Sheets
+    python3 build.py --pages         # temporäre Vorschau für GitHub Pages: Banner, noindex,
+                                     # Formulare aus, ohne PHP und .htaccess
 
 Aus den Schwimm-Apps (Knopf „Für die Website“), falls vorhanden:
     src/data/zeiten-app.json   Trainingszeiten aus Schwimmgruppen, ersetzen die Termine dieser Gruppen
@@ -58,7 +60,7 @@ APP_KURSE = "kurse-app.csv"
 APP_ZEITEN = "zeiten-app.json"
 
 
-def read_courses(sheet_url, app_file=None):
+def read_courses(sheet_url, app_file=None, fallback=False):
     sample = False
     if app_file:
         print(f"Kursliste aus der Schwimmkurs-App: {app_file.name}")
@@ -69,6 +71,9 @@ def read_courses(sheet_url, app_file=None):
             with urllib.request.urlopen(sheet_url, timeout=20) as r:
                 text = r.read().decode("utf-8-sig")
         except OSError as e:
+            if fallback:
+                print(f"  WARNUNG: Kursliste nicht erreichbar ({e}), nehme die Beispiel-Kursliste.")
+                return read_courses(None)
             sys.exit(f"Kursliste konnte nicht geladen werden ({e}).\n"
                      "Ist die Tabelle für 'Jeder mit dem Link' freigegeben? Ohne Internet: python3 build.py --beispiel")
     else:
@@ -229,21 +234,40 @@ def include(text, depth=0):
     return re.sub(r"\{\{>\s*([\w-]+)\s*\}\}", repl, text)
 
 
-def build(sheet_url=None, release=False, beispiel=False):
+PAGES_BANNER = (
+    '<div class="preview-banner" role="note"><strong>Vorschau</strong> – Entwurf „Variante 2“, '
+    'noch nicht die offizielle Website. Formulare sind hier noch nicht aktiv. '
+    '<a href="../">Zur Auswahl der Varianten</a></div>')
+PAGES_FORM_HINWEIS = ('<p class="callout form-inactive"><b>Noch nicht aktiv:</b> In dieser Vorschau wird '
+                      'nichts gesendet. Schreib uns bis zum Start der neuen Website bitte eine Mail.</p>')
+
+
+def pages_form(m):
+    form = m.group(0).replace(' action="api/formular.php"', ' action="#" data-vorschau')
+    form = re.sub(r'<button([^>]*)type="submit"', r'<button\1type="submit" disabled', form)
+    return PAGES_FORM_HINWEIS + form
+
+
+def build(sheet_url=None, release=False, beispiel=False, pages=False):
     site = load_json("site.json")
     zeiten = merge_app_times(load_json("zeiten.json"))
     hinweis = load_json("hinweis.json")
     app_kurse = SRC / "data" / APP_KURSE
     app_kurse = app_kurse if app_kurse.exists() and not beispiel and not sheet_url else None
     url = None if beispiel else (sheet_url or site.get("kurse_csv_url") or None)
-    rows, sample = read_courses(url, app_kurse)
+    rows, sample = read_courses(url, app_kurse, fallback=pages and not release)
     today = dt.date.today().strftime("%d.%m.%Y")
 
     if DIST.exists():
         shutil.rmtree(DIST)
     shutil.copytree(SRC / "assets", DIST / "assets")
     shutil.copytree(SRC / "static", DIST, dirs_exist_ok=True)
-    shutil.copytree(ROOT / "api", DIST / "api")
+    if pages:
+        # GitHub Pages: kein PHP, keine .htaccess, nicht in Suchmaschinen
+        (DIST / ".htaccess").unlink(missing_ok=True)
+        (DIST / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
+    else:
+        shutil.copytree(ROOT / "api", DIST / "api")
     (DIST / "data").mkdir()
     (DIST / "data" / "kurse.json").write_text(
         json.dumps({"stand": today, "beispiel": sample, "kurse": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -259,7 +283,9 @@ def build(sheet_url=None, release=False, beispiel=False):
         title = meta.get("title", "")
         full = full.replace("{{title}}", esc(f"{title} · {SITE_NAME}" if title else SITE_NAME))
         full = full.replace("{{description}}", esc(meta.get("description", "")))
-        full = full.replace("{{base}}", f'<base href="{esc(meta["base"])}">\n' if meta.get("base") else "")
+        base = meta.get("base") if not pages else None  # unter /variante-2/ gibt es kein absolutes "/"
+        full = full.replace("{{base}}", (f'<base href="{esc(base)}">\n' if base else "")
+                            + ('<meta name="robots" content="noindex, nofollow">\n' if pages else ""))
         full = full.replace("{{build_date}}", today)
         full = full.replace("{{woche}}", render_week(zeiten))
         full = full.replace("{{kurse}}", render_courses(rows, sample))
@@ -267,6 +293,9 @@ def build(sheet_url=None, release=False, beispiel=False):
         full = full.replace("{{downloads}}", render_downloads(site.get("downloads", [])))
         full = re.sub(r"\{\{zeiten:([\w-]+)\}\}", lambda m: render_group_times(zeiten, m.group(1)), full)
         full = re.sub(r"\{\{kurs-status:([^}]+)\}\}", lambda m: course_status(rows, m.group(1)), full)
+        if pages:
+            full = re.sub(r"(<body[^>]*>)", lambda m: m.group(1) + "\n" + PAGES_BANNER, full, count=1)
+            full = re.sub(r'<form class="form js-form".*?</form>', pages_form, full, flags=re.S)
         nav = meta.get("nav")
         if nav:
             full = full.replace(f'data-nav="{nav}"', f'data-nav="{nav}" aria-current="page"')
@@ -279,6 +308,9 @@ def build(sheet_url=None, release=False, beispiel=False):
             todos += n
         (DIST / page.name).write_text(full, encoding="utf-8")
 
+    if pages:
+        print(f"Fertig (GitHub-Pages-Vorschau): {DIST} ({todos} offene Platzhalter)")
+        return
     urls = [p.name for p in sorted(DIST.glob("*.html")) if p.name not in ("404.html", "danke.html")]
     (DIST / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -293,4 +325,4 @@ def build(sheet_url=None, release=False, beispiel=False):
 if __name__ == "__main__":
     args = sys.argv[1:]
     url = args[args.index("--sheet") + 1] if "--sheet" in args else None
-    build(url, release="--release" in args, beispiel="--beispiel" in args)
+    build(url, release="--release" in args, beispiel="--beispiel" in args, pages="--pages" in args)

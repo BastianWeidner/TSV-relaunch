@@ -27,6 +27,18 @@ python3 build.py --release    # bricht ab, solange Platzhalter offen sind
 
 Ansehen: `cd dist && python3 -m http.server` und dann http://localhost:8000 öffnen.
 
+## Vorschau auf GitHub Pages
+
+Zum Herzeigen werden beide Varianten automatisch als GitHub Page veröffentlicht, sobald etwas auf `main` landet (Workflow `.github/workflows/pages.yml`, auch per Hand unter Actions → „Vorschau auf GitHub Pages“ → Run workflow startbar).
+
+- Adresse: https://bastianweidner.github.io/TSV-relaunch/ mit Auswahlseite, dazu `/variante-1/` und `/variante-2/`.
+- Gebaut wird mit `python3 build.py --pages`: gelbes Vorschau-Banner, `noindex` und `robots.txt` sperren Suchmaschinen aus, alle Links relativ, keine `.htaccess`.
+- Variante 2 läuft dort ohne PHP: `api/` wird nicht veröffentlicht, die Formulare zeigen „Noch nicht aktiv“ und senden nichts. Ist das Google Sheet nicht erreichbar, nimmt der Build die Beispiel-Kursliste.
+- Die Dateien der Auswahlseite liegen in `pages/`.
+- Einmalig einschalten: Settings → Pages → Build and deployment → Source: **GitHub Actions**.
+
+Die Vorschau ist öffentlich. Für Strato immer normal bauen (ohne `--pages`).
+
 ## Hochladen zu Strato
 
 Den **Inhalt** von `dist/` der gewählten Variante per SFTP ins Webverzeichnis laden, inklusive der versteckten Datei `.htaccess`.
