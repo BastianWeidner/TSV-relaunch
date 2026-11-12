@@ -1,0 +1,61 @@
+# Temporäre Vorschau beider Varianten auf GitHub Pages.
+# Einmalig nötig: Settings → Pages → Build and deployment → Source: "GitHub Actions".
+# Ergebnis: https://<benutzer>.github.io/<repo>/ mit Auswahlseite, /variante-1/ und /variante-2/.
+name: Vorschau auf GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Variante 1 bauen
+        working-directory: variante-1
+        run: python3 build.py --pages
+
+      - name: Variante 2 bauen
+        working-directory: variante-2
+        # holt die Kursliste aus dem Google Sheet, sonst Beispieldaten
+        run: python3 build.py --pages
+
+      - name: Seite zusammenstellen
+        run: |
+          mkdir -p _site
+          cp -r pages/. _site/
+          cp -r variante-1/dist _site/variante-1
+          cp -r variante-2/dist _site/variante-2
+          # 404-Seite braucht absolute Pfade, Basis = /<repo>/
+          sed -i "s|__BASIS__|/${GITHUB_REPOSITORY#*/}/|g" _site/404.html
+          touch _site/.nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
