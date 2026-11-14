@@ -1,11 +1,17 @@
 # TSV Fischach Schwimmen – Apache-Konfiguration für Strato
-# HTTPS erzwingen
+# Immer HTTPS und ohne www, fest auf die eigene Domain
 RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^ https://tsv-fischach-schwimmen.de%{REQUEST_URI} [L,R=301]
 
 ErrorDocument 404 /404.html
 Options -Indexes
+
+# Notizen, Vorlagen und Editor-Sicherungen nie ausliefern
+<FilesMatch "(\.(md|bak|orig|swp|log|ini|sh|py)|~)$">
+  Require all denied
+</FilesMatch>
 
 # Weiterleitungen der alten Joomla-URLs (NE, damit #anker erhalten bleiben) (Inventar vom 29.10.2026)
 RewriteRule ^index\.php/?$ / [R=301,NE,L]
@@ -32,7 +38,10 @@ RewriteRule ^(index\.php/)?(blog|kontakt)(/.*)?$ /kontakt.html [R=301,NE,L]
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set X-Frame-Options "SAMEORIGIN"
   Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
-  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'"
+  # HSTS: Browser nutzen nur noch HTTPS. Erst kurz (5 Minuten) testen; wenn alles läuft,
+  # max-age=31536000 setzen. {{csp_script}} füllt build.py mit den Hashes der Inline-Skripte.
+  Header always set Strict-Transport-Security "max-age=300"
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' {{csp_script}}; object-src 'none'; form-action 'self'; frame-ancestors 'self'; base-uri 'self'"
 </IfModule>
 <IfModule mod_expires.c>
   ExpiresActive On

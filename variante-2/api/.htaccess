@@ -1,0 +1,6 @@
+# Nur formular.php ist von außen erreichbar. config.php (Geheimnis), die Vorlage
+# und der Zählerordner daten/ werden nie ausgeliefert, auch nicht, falls PHP einmal ausfällt.
+Require all denied
+<Files "formular.php">
+  Require all granted
+</Files>

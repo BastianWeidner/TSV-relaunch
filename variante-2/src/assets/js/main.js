@@ -26,6 +26,20 @@
   // Ohne JavaScript schickt der Browser das Formular normal ab (api/formular.php leitet auf danke.html).
   document.querySelectorAll('form.js-form:not([data-vorschau])').forEach(function (form) {
     var status = form.querySelector('.form-status');
+    // Zeitfalle: beim ersten Klick ins Formular einen signierten Zeitstempel holen.
+    // Klappt das nicht, wird trotzdem gesendet (dann gilt serverseitig eine strengere Grenze).
+    var zeit = document.createElement('input');
+    zeit.type = 'hidden';
+    zeit.name = 't';
+    form.appendChild(zeit);
+    form.addEventListener('focusin', function () {
+      if (zeit.value || zeit.dataset.geholt) return;
+      zeit.dataset.geholt = '1';
+      fetch(form.action + '?zeit=1', { headers: { Accept: 'application/json' } })
+        .then(function (r) { return r.json(); })
+        .then(function (res) { if (res && res.t) zeit.value = res.t; })
+        .catch(function () {});
+    });
     function show(kind, text) {
       status.hidden = false;
       status.className = 'form-status ' + kind;

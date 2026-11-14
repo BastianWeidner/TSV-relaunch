@@ -17,8 +17,10 @@ JSON: <!-- {"title": "...", "description": "...", "nav": "kurse"} -->
 Bausteine: {{> name}} fügt src/partials/name.html ein.
 Daten:     {{woche}}, {{zeiten:gruppe-1}}, {{kurse}}, {{kurs-status:Seepferdchenkurs}}, {{hinweis}}, {{downloads}}
 """
+import base64
 import csv
 import datetime as dt
+import hashlib
 import html
 import io
 import json
@@ -248,6 +250,19 @@ def pages_form(m):
     return PAGES_FORM_HINWEIS + form
 
 
+def csp_hashes(dist):
+    """Trägt die SHA-256-Hashes aller Inline-Skripte in die CSP der .htaccess ein,
+    damit die CSP ohne 'unsafe-inline' auskommt. Ändert sich ein Inline-Skript, einfach neu bauen."""
+    skripte = set()
+    for page in dist.glob("*.html"):
+        for code in re.findall(r"<script>(.*?)</script>", page.read_text(encoding="utf-8"), re.S):
+            skripte.add(base64.b64encode(hashlib.sha256(code.encode("utf-8")).digest()).decode())
+    ht = dist / ".htaccess"
+    text = ht.read_text(encoding="utf-8")
+    text = text.replace("{{csp_script}}", " ".join(f"'sha256-{h}'" for h in sorted(skripte)))
+    ht.write_text(text, encoding="utf-8")
+
+
 def build(sheet_url=None, release=False, beispiel=False, pages=False):
     site = load_json("site.json")
     zeiten = merge_app_times(load_json("zeiten.json"))
@@ -267,7 +282,13 @@ def build(sheet_url=None, release=False, beispiel=False, pages=False):
         (DIST / ".htaccess").unlink(missing_ok=True)
         (DIST / "robots.txt").write_text("User-agent: *\nDisallow: /\n", encoding="utf-8")
     else:
-        shutil.copytree(ROOT / "api", DIST / "api")
+        # Nur was auf den Server gehört: kein config.beispiel.php, keine Notizen oder Sicherungskopien
+        (DIST / "api").mkdir()
+        for name in ("formular.php", "config.php", ".htaccess"):
+            if (ROOT / "api" / name).exists():
+                shutil.copy(ROOT / "api" / name, DIST / "api" / name)
+        if not (ROOT / "api" / "config.php").exists():
+            print("  Hinweis: api/config.php fehlt (Geheimnis). Ohne sie bleibt das Formular aus.")
     (DIST / "data").mkdir()
     (DIST / "data" / "kurse.json").write_text(
         json.dumps({"stand": today, "beispiel": sample, "kurse": rows}, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -307,6 +328,9 @@ def build(sheet_url=None, release=False, beispiel=False, pages=False):
             print(f"  {page.name}: {n} Platzhalter zum Ausfüllen")
             todos += n
         (DIST / page.name).write_text(full, encoding="utf-8")
+
+    if not pages:
+        csp_hashes(DIST)
 
     if pages:
         print(f"Fertig (GitHub-Pages-Vorschau): {DIST} ({todos} offene Platzhalter)")
