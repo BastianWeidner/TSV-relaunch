@@ -46,6 +46,24 @@ des Hauptvereins) prüfen lassen, bevor ein Formular eingeschaltet wird.
    Bei BCC unbedingt auf "BCC" achten.
 4. Abmeldung per Mail genügt; jede Infomail enthält den Hinweis dazu.
 
+## Spam-Schutz der Formulare
+
+Ohne Schutz könnte jeder über die Formulare beliebig viele Mails unter der Vereinsdomain auslösen
+(Eingangsbestätigung, Infomail-Bestätigung). Dann landet die Domain auf Sperrlisten. `api/formular.php`
+verhindert das ohne Captcha und ohne Cookies:
+
+- Auswahlfelder (Kurs, Angebot, Thema) nur aus festen Listen; Mails an die eingetragene Adresse haben
+  festen Betreff und Text, also kein eigener Inhalt für Spammer.
+- Mengenbegrenzung (`GRENZEN`): 5 Absendungen je Besucher und Stunde (ohne JavaScript 2),
+  2 Mails an dieselbe Adresse pro Tag, Notbremse 60 Absendungen pro Stunde insgesamt.
+- Zeitfalle: `main.js` holt beim ersten Klick ins Formular einen signierten Zeitstempel; wer unter
+  3 Sekunden absendet, ist ein Bot. Dazu das Honeypot-Feld.
+- Infomail-Bestätigung per Knopf (POST) statt direkt per Link, damit Mail-Scanner nicht automatisch
+  bestätigen. Jeder Link bestätigt nur einmal.
+- Gezählt wird in `api/daten/` (wird automatisch angelegt, muss für PHP beschreibbar sein, ist per
+  `.htaccess` gesperrt). Gespeichert sind nur HMAC-Prüfwerte von IP- bzw. Mailadresse und Zeitpunkte;
+  Dateien werden nach 3 Tagen gelöscht. Steht so in der Datenschutzerklärung (Abschnitt „Schutz der Formulare“).
+
 ## Google Sheet für die Kursliste
 
 - Nur ein eigenes Blatt "Website" mit sechs Spalten veröffentlichen (kurs, termin, beginn,
@@ -61,6 +79,9 @@ des Hauptvereins) prüfen lassen, bevor ein Formular eingeschaltet wird.
 - [ ] `api/config.beispiel.php` als `api/config.php` speichern, `GEHEIMNIS` auf lange Zufallszeichenkette setzen (nur auf dem Server, nie ins Git); in `api/formular.php` `AKTIV = true`
 - [ ] Datenschutzerklärung (`datenschutz.html`) vom Vorstand freigegeben, Platzhalter gefüllt
 - [ ] Je Formular ein Testeintrag, Mail kommt an, Bestätigung kommt an
+- [ ] Prüfen, dass `api/daten/` angelegt wurde und `https://tsv-fischach-schwimmen.de/api/daten/` sowie `/api/config.php` mit 403 antworten
+- [ ] SPF, DKIM und DMARC für die Domain im Strato-Menü prüfen (sonst landen die Mails im Spam)
+- [ ] PHP-Version im Strato-Menü auf die neueste stellen (mindestens 8.1)
 - [ ] Eintrag ins Verzeichnis von Verarbeitungstätigkeiten des Vereins (Tabelle oben genügt als Grundlage)
 - [ ] Festlegen, wer die Warteliste führt und wer jährlich löscht
 

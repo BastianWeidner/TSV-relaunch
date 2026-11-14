@@ -6,6 +6,7 @@ __pycache__/
 
 # Geheimnisse und Zugangsdaten nie einchecken
 variante-2/api/config.php
+variante-2/api/daten/
 .env
 *.key
 
