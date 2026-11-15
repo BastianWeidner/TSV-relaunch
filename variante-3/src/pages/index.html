@@ -1,0 +1,185 @@
+<!-- {"title": "", "description": "Schwimmabteilung des TSV Fischach: Seepferdchenkurse, Training von Gruppe I bis zum Kader, Wassergymnastik und Erwachsenenschwimmen im Hallenbad Fischach.", "klasse": "start"} -->
+<section class="held held-start">
+  <div class="held-licht" aria-hidden="true"></div>
+  {{> blasen}}
+  <div class="huelle held-raster">
+    <div class="held-text">
+      <p class="auge">TSV Fischach · Abteilung Schwimmen</p>
+      <h1 class="zeilen"><span><span>Hier lernt</span></span><span><span>Fischach</span></span><span><span><em>schwimmen.</em></span></span></h1>
+      <p class="vorspann">Vom ersten Blubbern bis zum Startblock: Wir bringen Kindern das Schwimmen bei, trainieren vom ersten Abzeichen bis zum Wettkampf und halten Erwachsene mit Wassergymnastik und Techniktraining fit. Teamgeist und Spaß stehen dabei immer vorne.</p>
+      <div class="knoepfe">
+        <a class="knopf knopf-sonne" href="#wegweiser">Finde dein Angebot <span class="pfeil" aria-hidden="true">↓</span></a>
+        <a class="knopf knopf-geist" href="#zeiten">Wochenplan</a>
+      </div>
+    </div>
+    <div class="held-krake">
+      <span class="ring" aria-hidden="true"></span>
+      <img src="assets/img/logo-640.webp" width="640" height="495" alt="Unser Maskottchen: ein lachender Tintenfisch, der das rot-weiße Fischacher Wappen mit den drei Fischen umarmt" fetchpriority="high">
+    </div>
+  </div>
+  {{> wellen}}
+</section>
+
+<div class="huelle">
+  <ul class="zahlen" aria-label="Die Abteilung in Zahlen">
+    <li class="zahl reveal"><b data-zahl="1991" data-von="1950">1991</b><span>gegründet, seitdem im Wasser</span></li>
+    <li class="zahl reveal" style="--i:1"><b><span aria-hidden="true">~</span><span class="nur-sr">rund </span><span data-zahl="200">200</span></b><span>Mitglieder, vom Grundschulkind bis zur Wassergymnastik</span></li>
+    <li class="zahl reveal" style="--i:2"><b data-zahl="6">6</b><span>Stufen vom Seepferdchen bis zum Kader</span></li>
+    <li class="zahl reveal" style="--i:3"><b><span data-zahl="100">100</span>&nbsp;%</b><span>Ehrenamt, bei allem was wir tun</span></li>
+  </ul>
+</div>
+
+<section class="abschnitt" id="wegweiser" aria-labelledby="weiser-titel">
+  <div class="huelle">
+    <div class="kopfzeile reveal">
+      <p class="auge">Wegweiser</p>
+      <h2 id="weiser-titel">Wer möchte ins Wasser?</h2>
+      <p class="vorspann">Wähl aus, was zu dir passt. Du siehst sofort, welches Angebot das richtige ist, was es kostet und wie du dich anmeldest.</p>
+    </div>
+    <div class="reveal" data-reiter>
+      <div class="reiter-wahl" style="--n:3" aria-label="Für wen suchst du ein Angebot?">
+        <a class="wahl" data-tab href="#weg-lernen"><span class="bild" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><path d="M2 17c2-2 4-2 6 0s4 2 6 0 4-2 6 0M2 21c2-2 4-2 6 0s4 2 6 0 4-2 6 0M8 14l4-3 4 3"/></svg></span><b>Mein Kind lernt schwimmen</b><small>Seepferdchen, Aufbaukurs, Robby</small></a>
+        <a class="wahl" data-tab href="#weg-training"><span class="bild" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="17" cy="7" r="2.5"/><path d="M3 13l6-4 4 3 4-1M2 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg></span><b>Mein Kind kann schon schwimmen</b><small>Training in Gruppe I bis Kader</small></a>
+        <a class="wahl" data-tab href="#weg-erwachsene"><span class="bild" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.600-7 10-7 10z"/></svg></span><b>Ich selbst</b><small>Wassergymnastik, Erwachsenenschwimmen</small></a>
+      </div>
+
+      <div class="reiter-feld weiser-feld" id="weg-lernen">
+        <div class="weiser-text">
+          <p class="auge">Für Kinder · auch ohne Mitgliedschaft</p>
+          <h3>Schwimmkurs: in 6 bis 11 Terminen zum Seepferdchen</h3>
+          <p>Für Schulkinder, die noch nicht schwimmen können. Samstags im Hallenbad, in kleinen Gruppen mit höchstens 12 Kindern. Am Ende stehen 25 Meter am Stück und das erste Abzeichen.</p>
+          <p>{{kurs-status:Seepferdchenkurs}}</p>
+          <p class="preis"><b>12,50 €</b><span>pro Termin à 45 Minuten</span></p>
+          <ol class="schritte">
+            <li>Kind auf die Warteliste setzen</li>
+            <li>Wir melden uns per Mail, sobald ein Platz frei ist</li>
+            <li>Samstags ab ins Wasser</li>
+          </ol>
+          <div class="knoepfe"><a class="knopf knopf-rot" href="anmelden.html#warteliste">Auf die Warteliste <span class="pfeil" aria-hidden="true">→</span></a><a class="textlink" href="schwimmen-lernen.html">Alles zu den Kursen</a></div>
+        </div>
+        <figure class="foto"><img src="assets/img/nudel-800.webp" srcset="assets/img/nudel-800.webp 800w, assets/img/nudel-1600.webp 1600w" sizes="(max-width: 52rem) 100vw, 34rem" width="800" height="663" alt="Ein Kind mit Schwimmflügeln hält sich an einer Poolnudel fest, davor ein roter Ball" loading="lazy"></figure>
+      </div>
+
+      <div class="reiter-feld weiser-feld" id="weg-training">
+        <div class="weiser-text">
+          <p class="auge">Für Mitglieder</p>
+          <h3>Training: Bahn für Bahn besser werden</h3>
+          <p>Nach dem Seepferdchen geht es in unseren Trainingsgruppen weiter. Jede Gruppe hat ein Ziel und ein Abzeichen: Seeräuber, Bronze, Silber, Gold. Im Kader schwimmen wir Wettkämpfe bis auf bayerischer und süddeutscher Ebene.</p>
+          <p class="preis"><b>52,50 €</b><span>pro Jahr für Kinder und Jugendliche</span></p>
+          <ol class="schritte">
+            <li>Schnuppertraining per Mail anfragen</li>
+            <li>Wir sagen dir, welche Gruppe passt und ob Platz ist</li>
+            <li>Mitglied werden und mittrainieren</li>
+          </ol>
+          <div class="knoepfe"><a class="knopf knopf-rot" href="anmelden.html#nachricht-schnuppern">Schnuppern anfragen <span class="pfeil" aria-hidden="true">→</span></a><a class="textlink" href="training.html">Alle Gruppen ansehen</a></div>
+        </div>
+        <figure class="foto"><img src="assets/img/sprung-800.webp" srcset="assets/img/sprung-800.webp 800w, assets/img/sprung-1600.webp 1600w" sizes="(max-width: 52rem) 100vw, 34rem" width="800" height="450" alt="Ein Schwimmer springt kopfüber ins Becken des Hallenbads" loading="lazy"></figure>
+      </div>
+
+      <div class="reiter-feld weiser-feld" id="weg-erwachsene">
+        <div class="weiser-text">
+          <p class="auge">Für Erwachsene · auch ohne Mitgliedschaft</p>
+          <h3>Fit im Wasser: Gymnastik oder Technik</h3>
+          <p>Wassergymnastik mit Musik und Geräten, gelenkschonend und gesellig, am Dienstag und Donnerstag um 16:30 Uhr. Oder Erwachsenenschwimmen am Donnerstag um 17:15 Uhr: Technik verbessern, Kraul lernen, Ausdauer aufbauen, mit Trainer am Beckenrand.</p>
+          <p class="preis"><b>40 €</b><span>Zehnerkarte, 10 × 30 Minuten</span></p>
+          <ol class="schritte">
+            <li>Platz anfragen, die Gruppen sind klein</li>
+            <li>Wir sagen dir, ab wann du kommen kannst</li>
+            <li>Zehnerkarte vor Ort kaufen und loslegen</li>
+          </ol>
+          <div class="knoepfe"><a class="knopf knopf-rot" href="anmelden.html#erwachsene">Platz anfragen <span class="pfeil" aria-hidden="true">→</span></a><a class="textlink" href="erwachsene.html">Mehr erfahren</a></div>
+        </div>
+        <figure class="foto"><img src="assets/img/freibad-abend-800.webp" srcset="assets/img/freibad-abend-800.webp 800w, assets/img/freibad-abend-1600.webp 1600w" sizes="(max-width: 52rem) 100vw, 34rem" width="800" height="600" alt="Ruhiges Becken in der Abendsonne" loading="lazy"></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="huelle">
+  {{hinweis}}
+</div>
+
+<section class="abschnitt" aria-labelledby="weg-titel">
+  <div class="huelle raster-2 breit-links">
+    <div>
+      <div class="kopfzeile reveal">
+        <p class="auge">Unser Programm</p>
+        <h2 id="weg-titel">Vom ersten Blubbern bis zum Startblock</h2>
+        <p class="vorspann">Bei uns greift eins ins andere. Wer als Kind im Schwimmkurs anfängt, kann Stufe für Stufe weiterschwimmen, bis in den Kader.</p>
+      </div>
+      <ol class="stufen" data-stufen>
+        <li class="stufen-krake" aria-hidden="true"><img src="assets/img/logo-96.webp" width="96" height="74" alt=""></li>
+        <li class="stufe reveal"><span class="medaille m-robby" aria-hidden="true">R</span>
+          <div class="karte hebt stufe-karte"><p class="auge">Schwimmkurs · 4 bis 6 Jahre</p><h3><a href="schwimmen-lernen.html#robby">Robby-Kurs</a></h3><p class="leise">Wassergewöhnung ohne Leistungsdruck. Derzeit ausgesetzt.</p></div></li>
+        <li class="stufe reveal"><span class="medaille m-see" aria-hidden="true">S</span>
+          <div class="karte hebt stufe-karte"><p class="auge">Schwimmkurs · ab Einschulung</p><h3><a href="schwimmen-lernen.html#seepferdchen">Seepferdchen</a></h3><p class="leise">25 Meter schwimmen, springen, tauchen. Wem ein Stück fehlt, der hängt den Aufbaukurs an.</p></div></li>
+        <li class="stufe reveal"><span class="medaille m-pirat" aria-hidden="true">I</span>
+          <div class="karte hebt stufe-karte"><p class="auge">Training · Abzeichen Seeräuber</p><h3><a href="training.html#gruppe-1">Gruppe I</a></h3><p class="leise">Spielerisch an der Technik arbeiten und sicherer werden.</p></div></li>
+        <li class="stufe reveal"><span class="medaille m-bronze" aria-hidden="true">II</span>
+          <div class="karte hebt stufe-karte"><p class="auge">Training · Abzeichen Bronze</p><h3><a href="training.html#gruppe-2">Gruppe II</a></h3><p class="leise">Rücken, Brust und Kraul, längere Strecken am Stück.</p></div></li>
+        <li class="stufe reveal"><span class="medaille m-silber" aria-hidden="true">III</span>
+          <div class="karte hebt stufe-karte"><p class="auge">Training · Abzeichen Silber</p><h3><a href="training.html#gruppe-3">Gruppe III</a></h3><p class="leise">Delfin kommt dazu, die ersten Wettkämpfe auch.</p></div></li>
+        <li class="stufe reveal"><span class="medaille m-gold" aria-hidden="true">IV</span>
+          <div class="karte hebt stufe-karte"><p class="auge">Training · Abzeichen Gold</p><h3><a href="training.html#gruppe-4">Gruppe IV</a></h3><p class="leise">Kondition: mindestens 1500 Meter pro Einheit, Start und Wende.</p></div></li>
+        <li class="stufe reveal"><span class="medaille m-kader" aria-hidden="true">K</span>
+          <div class="karte hebt stufe-karte"><p class="auge">Leistung · Wettkampf</p><h3><a href="training.html#kader">Kader</a></h3><p class="leise">Leistungstraining zweimal pro Woche, Wettkämpfe bis auf bayerischer und süddeutscher Ebene.</p></div></li>
+      </ol>
+    </div>
+    <div class="stapel-gross klebt">
+      <div class="foto-stapel reveal">
+        <figure class="foto hoch"><img src="assets/img/hallenbad-800.webp" srcset="assets/img/hallenbad-800.webp 800w, assets/img/hallenbad-1600.webp 1600w" sizes="(max-width: 52rem) 90vw, 30rem" width="800" height="600" alt="Leeres Hallenbad mit Bahnleine und großen Fenstern" loading="lazy"></figure>
+        <figure class="foto"><img src="assets/img/sprung-800.webp" width="800" height="450" alt="Kopfsprung ins Becken" loading="lazy"></figure>
+      </div>
+      <div class="karte reveal">
+        <p class="auge">Und für Erwachsene</p>
+        <h3>Wassergymnastik &amp; Erwachsenenschwimmen</h3>
+        <p class="leise">Zwei Angebote am späten Nachmittag, offen für alle, bezahlt wird mit der Zehnerkarte.</p>
+        <p><a class="textlink" href="erwachsene.html">Zu den Erwachsenenangeboten</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="abschnitt band" id="zeiten" aria-labelledby="zeiten-titel">
+  <div class="huelle">
+    <div class="kopfzeile reveal">
+      <p class="auge">Wochenplan</p>
+      <h2 id="zeiten-titel">Wann ist was im Wasser?</h2>
+      <p class="vorspann">Gruppe I und Gruppe II gibt es mehrfach. Welche Termine für dein Kind gelten, sagt dir das Trainerteam. Der Kader trainiert zweimal pro Woche.</p>
+    </div>
+    <div class="reveal">{{woche}}</div>
+    <p class="reveal" style="margin-top:1.5rem"><a class="textlink" href="zeiten-preise.html#preise">Alle Preise und Beiträge</a></p>
+  </div>
+</section>
+
+<section class="abschnitt" aria-labelledby="werte-titel">
+  <div class="huelle">
+    <div class="kopfzeile mittig reveal">
+      <p class="auge">Wofür wir stehen</p>
+      <h2 id="werte-titel">Teamgeist und Spaß stehen im Vordergrund</h2>
+    </div>
+    <ul class="raster-4">
+      <li class="karte hebt wert reveal"><span class="zeichen" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M5.600 5.600l3.600 3.600M14.800 14.800l3.600 3.600M18.400 5.600l-3.600 3.600M9.200 14.800l-3.600 3.600"/></svg></span><h3>Sicher schwimmen</h3><p class="leise">Sicher schwimmen ist das Wichtigste, was ein Kind im Wasser lernen kann. Darum fangen wir bei den Kleinsten an.</p></li>
+      <li class="karte hebt wert reveal" style="--i:1"><span class="zeichen" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.500"/><path d="M2 20c0-3.500 2.700-6 6-6s6 2.500 6 6M15 14.200c3.400-.6 7 1.500 7 5.800"/></svg></span><h3>Teamgeist</h3><p class="leise">Vom Seeräuber bis zum Kader: Wir trainieren miteinander. Teamgeist und Spaß stehen bei uns im Vordergrund.</p></li>
+      <li class="karte hebt wert reveal" style="--i:2"><span class="zeichen" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.400-7-10a4 4 0 0 1 7-2.600A4 4 0 0 1 19 11c0 5.600-7 10-7 10z"/></svg></span><h3>Ehrenamt</h3><p class="leise">Abteilungsleitung, Kursleitungen, Trainerinnen und Trainer: Alle hier arbeiten ehrenamtlich.</p></li>
+      <li class="karte hebt wert reveal" style="--i:3"><span class="zeichen" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7h14M5 7l-3 7a3.500 3.500 0 0 0 6 0L5 7zM19 7l-3 7a3.500 3.500 0 0 0 6 0l-3-7zM8 21h8"/></svg></span><h3>Fair vergeben</h3><p class="leise">Kursplätze vergeben wir nach Anmeldung, mit Vorrang für Kinder aus Fischach und dem direkten Einzugsgebiet.</p></li>
+    </ul>
+  </div>
+</section>
+
+<section class="abschnitt band-schaum" aria-labelledby="bad-titel">
+  <div class="huelle raster-2 mitte">
+    <div class="stapel reveal von-links">
+      <p class="auge">Wo wir schwimmen</p>
+      <h2 id="bad-titel">Unser Bad</h2>
+      <p class="vorspann">Training und Kurse finden im Schulschwimmbad Fischach statt, dem Hallenbad in der Grund- und Mittelschule. Durch die große Fensterfront sieht man beim Schwimmen nach draußen, auch wenn dort Schnee liegt.</p>
+      <div class="knoepfe"><a class="knopf" href="verein.html#bad">Anfahrt</a><a class="knopf knopf-geist" href="verein.html">Über den Verein</a></div>
+    </div>
+    <div class="foto-stapel">
+      <figure class="foto quer reveal"><img src="assets/img/hallenbad-winter-800.webp" srcset="assets/img/hallenbad-winter-800.webp 800w, assets/img/hallenbad-winter-1600.webp 1600w" sizes="(max-width: 52rem) 90vw, 32rem" width="800" height="450" alt="Hallenbad im Winter, draußen liegt Schnee" loading="lazy"></figure>
+      <figure class="foto reveal" style="--i:2"><img src="assets/img/hallenbad-800.webp" width="800" height="600" alt="Hallenbad mit Bahnleine und großen Fenstern" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+{{> infomail-band}}
