@@ -1,0 +1,79 @@
+<!-- {"title": "Zeiten & Preise", "description": "Wochenplan, alle Kosten und die Mitgliedschaft der Schwimmabteilung TSV Fischach: Schwimmkurse, Zehnerkarten, Beiträge, Abzeichen und Formulare.", "nav": "zeiten"} -->
+<section class="held held-klein">
+  <div class="held-licht" aria-hidden="true"></div>
+  {{> blasen}}
+  <div class="huelle held-raster">
+    <div class="held-text">
+      <p class="auge">Alles Praktische an einem Ort</p>
+      <h1>Zeiten &amp; Preise</h1>
+      <p class="vorspann">Wann welche Gruppe im Wasser ist und was es kostet. Kurse und Erwachsenenangebote gibt es auch ohne Mitgliedschaft. Für das Training in den Gruppen braucht es eine Mitgliedschaft im TSV Fischach.</p>
+      <div class="knoepfe"><a class="knopf knopf-sonne" href="#wochenplan">Wochenplan</a><a class="knopf knopf-geist" href="#preise">Preise</a><a class="knopf knopf-geist" href="#mitgliedschaft">Mitgliedschaft</a></div>
+    </div>
+    <div class="held-krake"><img src="assets/img/logo-320.webp" width="320" height="248" alt=""></div>
+  </div>
+  {{> wellen}}
+</section>
+
+<section class="abschnitt" id="wochenplan" aria-labelledby="plan-titel">
+  <div class="huelle">
+    <div class="kopfzeile reveal">
+      <p class="auge">Wochenplan</p>
+      <h2 id="plan-titel">Unsere Trainingszeiten</h2>
+      <p class="vorspann">Gruppe I und Gruppe II gibt es mehrfach: Unter der Woche und am Samstag trainieren verschiedene Gruppen. Welche Termine für dein Kind gelten, sagt dir das Trainerteam. Der Kader trainiert zweimal pro Woche.</p>
+    </div>
+    <div class="reveal">{{woche}}</div>
+    <p class="klein leise reveal" style="margin-top:1.25rem">Alle Zeiten gelten für das Schulschwimmbad Fischach, Mühlstraße 15. <a href="verein.html#bad">Anfahrt</a></p>
+  </div>
+</section>
+
+<section class="abschnitt band" id="preise" aria-labelledby="preise-titel">
+  <div class="huelle stapel-gross">
+    <div class="kopfzeile reveal" style="margin-bottom:0">
+      <p class="auge">Ohne Mitgliedschaft</p>
+      <h2 id="preise-titel">Kurse &amp; Zehnerkarten</h2>
+      <p class="vorspann">Alle Kosten auf einen Blick.</p>
+    </div>
+    <div class="rollbar reveal" tabindex="0" role="region" aria-label="Preistabelle">
+      <table class="preise">
+        <thead><tr><th scope="col">Angebot</th><th scope="col">Umfang</th><th scope="col" class="rechts">Preis</th></tr></thead>
+        <tbody>
+          <tr><td><b>Seepferdchenkurs</b> und <b>Robby-Kurs</b><br><span class="klein leise">12 € Kurs + 0,50 € Eintritt pro Termin. 6 bis 11 Termine, je nach Saisonstart und Ferien.</span></td><td>6–11 × 45 Min.</td><td class="betrag">12,50 € / Termin</td></tr>
+          <tr><td><b>Aufbaukurs</b><br><span class="klein leise">Wie oben, nur wenn das Seepferdchen knapp nicht geschafft wurde</span></td><td>unter 6 × 45 Min.</td><td class="betrag">12,50 € / Termin</td></tr>
+          <tr><td><b>Wassergymnastik</b> oder <b>Erwachsenenschwimmen</b><br><span class="klein leise">Stempelkarte, vor Ort erhältlich</span></td><td>10 × 30 Min.</td><td class="betrag">40 €</td></tr>
+          <tr><td><b>Schwimmabzeichen</b><br><span class="klein leise">2,50 € Aufnäher + 2,50 € Urkunde</span></td><td>je Abzeichen</td><td class="betrag">5 €</td></tr>
+          <tr><td><b>Vereins-Badekappe</b><br><span class="klein leise">Mit Tintenfisch, bei den Trainerinnen und Trainern. <a href="verein.html#kleidung">Vereinskleidung</a></span></td><td>je Stück</td><td class="betrag">5 €</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="hinweis sonne reveal"><b>Der 50-€-Gutschein</b>Den 50-€-Gutschein gibt es nicht mehr. Bereits eingereichte Gutscheine haben wir schon vor längerer Zeit weitergegeben; sobald das Geld bei uns ankommt, erstatten wir es dir direkt zurück.</p>
+  </div>
+</section>
+
+<section class="abschnitt" id="mitgliedschaft" aria-labelledby="mitglied-titel">
+  <div class="huelle stapel-gross">
+    <div class="kopfzeile reveal" style="margin-bottom:0">
+      <p class="auge">Für das Training</p>
+      <h2 id="mitglied-titel">Mitgliedschaft</h2>
+      <p class="vorspann">Der Beitrag setzt sich aus dem TSV-Beitrag, dem Abteilungsbeitrag und einer einmaligen Registrierung beim Deutschen Schwimm-Verband zusammen.</p>
+    </div>
+    <div class="raster-2">
+      <div class="karte hebt beitrag stapel reveal">
+        <p class="auge">Mitgliedschaft</p>
+        <h3>Kinder &amp; Jugendliche</h3>
+        <p class="preis"><b>52,50 €</b><span>pro Jahr</span></p>
+        <ul><li>TSV-Beitrag pro Jahr <b>37,50 €</b></li><li>Abteilungsbeitrag pro Jahr <b>15 €</b></li><li>DSV-Registrierung, einmalig <b>10 €</b></li></ul>
+      </div>
+      <div class="karte hebt beitrag erw stapel reveal" style="--i:1">
+        <p class="auge">Mitgliedschaft</p>
+        <h3>Erwachsene</h3>
+        <p class="preis"><b>90 €</b><span>pro Jahr</span></p>
+        <ul><li>TSV-Beitrag pro Jahr <b>75 €</b></li><li>Abteilungsbeitrag pro Jahr <b>15 €</b></li><li>DSV-Registrierung, einmalig <b>10 €</b></li></ul>
+      </div>
+    </div>
+    <div class="stapel reveal" id="formulare">
+      <h3>Formulare zum Herunterladen</h3>
+      {{downloads}}
+      <p class="leise klein">Ausgefüllt und unterschrieben bei den Trainerinnen und Trainern abgeben. Papierformulare gibt es dort auch.</p>
+    </div>
+  </div>
+</section>
